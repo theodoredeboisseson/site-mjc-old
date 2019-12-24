@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+
+    <!-- Page Content -->
+    <div class="container">
+    
+        <!-- Page Title -->
+        <div class="header rounded mt-4 mb-3" style="background-image: url({{ MEDIA_URL }}{{ animations_type.image }})">
+            <h1 class="txt-white center text-uppercase"> {{ workshop.title }} / {{ animations_type.animation_type }} </h1>
+        </div>
+    
+        <!-- Description -->
+        <hr>
+        
+        <div class="col-md-10 offset-md-1 col-md-8 p-2 text-center text-muted lead">
+            <p class="">{{ animations_type.description|linebreaks }}</p>
+        </div>
+        
+        <hr>
+        
+        <!-- Data -->
+        <div class="row">
+            
+            {% for animation in animations %}
+                <div class="col-lg-4 mb-4">
+                    
+                    <div class="card card-list h-100 card-list-hover" onclick="goTo('{% url 'w_animation_details' animations_type.animation_type animation.name animation.id %}')">
+                        
+                        <div class="row m-0">    
+                            <div class="col-md-12 img" style="background-image:url('{{ MEDIA_URL }}{{ animation.image }}')"></div>    
+                        </div>
+                        
+                        <h4 class="card-header text-capitalize"> {{ animation.name }}<br><small></small></h4>
+                        
+                        <!--<div class="card-body">-->
+                        <!--    <p class="card-text">{{ animation.description|truncatewords:20 }}</p>-->
+                        <!--</div>-->
+                        
+                        <!--<div class="card-footer">-->
+                        <!--    <a href="{% url 'w_animation_details' animations_type.animation_type animation.name animation.id %}" class="btn btn-primary">Découvrir</a>-->
+                        <!--</div>-->
+                        
+                    </div>
+                    
+                </div>
+            {% endfor %}
+                
+        </div>
+        <!-- /.row -->
+        
+    </div>
+    <!-- /.container --> 
+
+{% endblock %}

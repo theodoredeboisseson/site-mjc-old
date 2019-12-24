@@ -1,0 +1,7 @@
+__pycache__
+*idea
+.project
+launch.sh
+db
+db.sqlite3
+htmlcov

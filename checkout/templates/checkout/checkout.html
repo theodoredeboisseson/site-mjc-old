@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load bootstrap_tags %}
+
+{% block specific_js %}
+    
+    <script src="{% static 'checkout/ajax.jquery.min.js' %}"></script>
+    <!-- CDN version: <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+    
+    <script src="https://js.stripe.com/v2/" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+      //<![CDATA[
+      Stripe.publishableKey = '{{ publishable }}';
+      //]]>
+    </script>
+    
+    <script type="text/javascript" src="{% static 'checkout/stripe.js' %}"></script>
+
+{% endblock specific_js %}
+
+{% block content %}
+        
+    <!-- Page Content -->
+    <div class="container">
+      
+        <div class="col-md-8 offset-md-2">  
+            
+                <h1 class="mt-4 mb-3">Paiement</h1>
+                
+                <p>Activité :
+                    <strong>
+                        <span class="text-nowrap">{{ slot.animation }} - </span>
+                        <span class="text-nowrap">{{ slot.day }} - </span>
+                        <span class="text-nowrap">({{ slot.time_start }} / {{ slot.time_end }})</span>
+                    </strong>
+                    </br>
+                    <!--Participant : <strong>{{ user.first_name }} {{ user.last_name  }}</strong>.</br>-->
+                   Tarif :
+                    <strong>{{ slot.rate_resident_1 }} €</strong>
+                </p>
+                
+        
+                <form role="form" method="post" id="payment-form" action="{% url 'payment' %}">
+                
+                    <div id="credit-card-errors" style="display:none">
+                        <div class="alert alert-dismissible alert-danger block-message error" id="stripe-error-message"></div>
+                    </div>
+                
+                    <div class="form-group">
+                        {{ payment_form|as_bootstrap }}
+                    </div>
+                
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="hidden" name="slot_id" value="{{ slot.id }}"/>
+                        <input class="btn btn-outline-success text-uppercase" id="submit_payment_btn" name="commit" type="submit" value="Payer">
+                    </div>
+                
+                </form>
+
+                <a href="{% url 'home' %}">
+                    <button type="button" class="btn btn-outline-danger text-uppercase"> ANNULER </button>
+                </a>
+                
+        </div>
+        
+    </div>
+    <!-- /.container -->
+  
+
+{% endblock %}
+
+
+
+           
+            
+        

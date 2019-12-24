@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+
+<!-- Page Content -->
+<div class="container">
+    
+        <div class="col-md-8 offset-md-2"> 
+        
+        <div class="row">
+            <h1 class="mt-5 mb-5 text-capitalize">Lieux & Salles</h1>
+            <p class="lead">Vous trouverez dans cette section la liste des lieux où se déroule les activités et ateliers de la MJC avec leur adresse.</p>
+        </div>        
+            
+            {% for venue in venues %}    
+                <div class="row">
+                    <h2 class="mt-4 mb-3">{{ venue.name }}</h2>
+                </div>
+                 
+                <div class="row">
+                        
+                    <div class="iframe-map-container mb-4"> 
+                        <iframe class="iframe-map-container" src="{{ venue.iframe_url_map }}" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                    
+                    <div class="col-md-12 px-0">
+                        <h4 class="mt-2 mb-3 ">Information</h4>   
+                    </div>
+                     
+                    <div class="col-md-12 px-0">
+                        <p><strong>Adresse :</strong></br>
+                        {{ venue.street_nb }}{% if venue.street_nb is not None %} {% endif %}{{ venue.street_name }}</br>
+                        {{ venue.postcode }}{% if venue.postcode is not None %} {% endif %}{{ venue.city }}</p>
+                    </div>
+                
+                </div>
+            {% endfor %}
+            
+            
+        </div>
+
+</div>
+<!-- /.container -->
+{% endblock %}

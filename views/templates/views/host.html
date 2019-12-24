@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="col-md-6 offset-md-3"> 
+    
+        <div class="row">
+            <button class="btn btn-outline-danger text-uppercase mt-5" onclick="goBack()">Retour</button>
+        </div>
+        
+        <div class="row">
+            <h1 class="mt-4 mb-3">{{ host.firstname}} {{ host.lastname }}</h1>
+        </div>
+         
+        <div class="row">
+        
+            <div class="">
+                <img class="img-fluid rounded mb-4" src="{{ MEDIA_URL }}{{ host.image }}" alt="{{ host.firstname}} {{ host.lastname }}">
+            </div>
+              
+            <div class="col-md-12 px-0">      
+                <h2 "mt-4 mb-3">Qui suis-je ?</h2>
+            </div>
+            
+            <div class="col-md-12 px-0">
+                <!--<p>{{ host.resume }}</p>-->
+                <i>C'est la question que se posent vos animateurs, qui sont en train de rédiger leur copie pour renseigner cette section ! =)</i>
+            </div>
+            
+        </div>
+            
+    </div>
+
+</div>
+<!-- /.container -->
+
+{% endblock %}

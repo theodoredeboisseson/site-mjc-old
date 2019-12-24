@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Title -->
+        <div class="header rounded mt-4 mb-3" style="background-image: url({{ MEDIA_URL }}{{ activity.image }})">
+            <h1 class="txt-white center text-uppercase"> {{ activity.title }} </h1>
+        </div>
+
+        <!-- Description -->
+        <hr>
+
+        <div class="col-md-10 offset-md-1 col-md-8 p-2 text-center text-muted lead">
+            <p class="">{{ activity.description|linebreaks }}</p>
+        </div>
+
+        <hr>
+
+        <!-- Last minute note -->
+        <div class="alert alert-success">
+            <strong>Lien vers la plaquette des activités 2019/2020: <a href="http://online.fliphtml5.com/wviwb/vdiv/">ici</a></strong>
+        </div>
+        <!-- Last minute note -->
+        <div class="alert alert-success">
+            <strong>La période d’activité va du 9 septembre 2019 au 27 juin 2020 sauf vacances scolaires et jours fériés.<br>
+            Pour le forfait Gym : Prolongation des cours durant la 1ère semaine des vacances scolaires (sauf Noël) avec Alexandre Maurette.</strong>
+        </div>
+
+        <!-- Data -->
+        <div class="row">
+
+            {% for animation_type in animations_types_activities %}
+                <div class="col-lg-4 mb-4">
+
+                    <div class="card card-list card-list-hover h-100" onclick="goTo('{% url 'a_list_of_animations' animation_type.animation_type %}')" >
+
+                        <div class="row m-0">
+                            <div class="col-md-12 img" style="background-image:url('{{ MEDIA_URL }}{{ animation_type.image }}')"></div>
+                        </div>
+
+                        <h4 class="card-header text-capitalize"> {{ animation_type.animation_type }}</h4>
+
+                    </div>
+
+                </div>
+            {% endfor %}
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+{% endblock %}

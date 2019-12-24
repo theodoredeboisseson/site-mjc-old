@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+    
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+    
+        <!-- Content Column -->
+        <div class="col-md-8 offset-md-2">
+            
+            <button class="btn btn-outline-danger mt-5" onclick="goBack()">Retour</button>
+            
+            <div class="row">
+                <div class="col-xs-12 px-3 py-3 atcha"><img class="img-fluid rounded height-max-1" alt="" src="{{ MEDIA_URL }}{{ event.image }}"></div>    
+            </div>
+            
+            <hr>
+            
+            <!-- Animation description -->
+            <h1 class="mt-4 text-center text-danger">{{ event.family }}</h1>
+            
+            <h1 class="mt-4 text-center">{{ event.title }}</h1>
+            
+            <h2 class="mt-4 mb-3 text-center">{{ event.subtitle }}</h2>
+            
+            <p class="mt-4 mb-4 lead text-center text-uppercase">{{ event.date_and_time }}</p>
+        
+            <hr>
+            
+            {% if event.bubble_info|length > 0 %}
+            <div class="alert alert-success">
+                <strong>{{ event.bubble_info}}</strong>
+            </div>
+            {% endif %}
+
+            <div class="mt-3 row">
+                            
+                <div class="col-md-3">
+                    <strong><span class="text-nowrap">Présentation :</span></strong>
+                </div>
+                
+                <div class="col-md-9">
+                    {{ event.description|linebreaks }}
+                </div>
+                            
+            </div>
+
+            {% if event.venue|length > 0 %}
+            <div class="mt-3 row">
+
+                    <div class="col-md-3">
+                        <strong><span class="text-nowrap">Lieu(x) :</span></strong>
+                    </div>
+
+                    <div class="col-md-9">
+                        {{ event.venue }}
+                    </div>
+
+            </div>
+            {% endif %}
+                
+            {% if event.notes|length > 0 %}
+            <div class="mt-3 row">
+
+                    <div class="col-md-3">
+                        <strong><span class="text-nowrap">Notes :</span></strong>
+                    </div>
+
+                    <div class="col-md-9">
+                        {{ event.notes }}
+                    </div>
+
+            </div>
+            {% endif %}
+                    
+            {% if event.rate|length > 0 %}
+            <div class="mt-3 row">
+                    
+                    <div class="col-md-3">
+                        <strong><span class="text-nowrap">Tarif :</span></strong>
+                    </div>
+                    
+                    <div class="col-md-9">
+                        {{ event.rate }}
+                    </div>
+
+            </div>
+            {% endif %}
+                    
+            {% if event.contact|length > 0 %}
+            <div class="mt-3 row">
+                    
+                    <div class="col-md-3">
+                        <strong><span class="text-nowrap">Personne à contacter :</span></strong>
+                    </div>
+                    
+                    <div class="col-md-9">
+                        {{ event.contact }}
+                    </div>
+
+            </div>
+            {% endif %}
+            
+            {% if event.file %}
+            <div class="mt-3 row">
+                            
+                <div class="col-md-3">
+                    <strong><span class="text-nowrap"></span></strong>
+                </div>
+                
+                <div class="col-md-12">
+                    <a href="{{ MEDIA_URL }}{{ event.file }}" target="_blank">
+                        <button class="btn btn-outline-warning btn-block text-uppercase">PDF - PLEIN ECRAN</button>
+                    </a>
+                </div>
+                
+               <div class="col-md-12 mt-3">
+                    <object class="rounded border border-warning" data="{{ MEDIA_URL }}{{ event.file }}" type="application/pdf" width="100%" height="600vh">
+                        <embed src="{{ MEDIA_URL }}{{ event.file }}" type="application/pdf">
+                            <p>Votre navigateur n'affiche pas le PDF. Vous pouvez le télécharger si vous souhaitez le voir : <a href="{{ MEDIA_URL }}{{ event.file }}">Download PDF</a>.</p>
+                        </embed>
+                    </object>
+                </div>
+
+            </div>
+            {% endif %}
+                    
+        </div>
+        <!-- /.col -->
+        
+    </div>
+    <!-- /. row -->
+    
+</div>
+<!-- container -->
+            
+{% endblock %}

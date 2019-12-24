@@ -1,0 +1,59 @@
+{% extends 'base.html' %} {% load static from staticfiles %} {% block content %}
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-8 offset-md-2">
+            
+            <button class="btn btn-outline-danger mt-5 text-uppercase" onclick="goBack()">Retour</button>
+
+            <h1 class="mt-5 mb-5">Inscription aux stages<small></small></h1>
+
+            <hr>
+
+            <p><strong>Menu</strong></p>
+            <a href="#atelier"><strong>Modalités d’inscription aux Parcours Découverte et Stages</strong></a><br>
+            <a href="#tarifsworkshop"><strong>Tarifs</strong></a><br>
+            <a href="#touteslesmodalites"><strong>Toutes les modalités</strong></a><br>
+
+            <hr>
+            
+            <h2>Modalités d’inscription aux<br>Parcours Découverte & Stages</h2>
+            
+            <a class="anchor" id="atelier"></a>
+            
+            <p>Les modalités sont les suivantes :</p>
+            
+            <ul>
+                <li class="mt-3">Réservation et paiement à effectuer une semaine auparavant, possible par courrier.</li>
+                <li class="mt-3">Pour les non-adhérents : Carte «Spécial Stage» (9 €) obligatoire.</li>
+                <li class="mt-3">Chaque stage nécessite un quota de participants. S’il n’est pas atteint, la MJC se réserve le droit d’annuler le module.</li>
+                <li class="mt-3">Reportez-vous à "Toutes les modalités", complémentaire de cette section.
+            </ul>
+            
+            <p>Renseignez vous auprès de l'accueil.</p>
+            
+            <h2>Tarifs</h2>
+            
+            <a class="anchor" id="tarifsworkshop"></a>
+            
+            <p>Les tarifs d'un atelier est indiqué sur la page de celui-ci.</p>
+            
+            <h2>Toutes les modalités</h2>
+
+            <a class="anchor" id="touteslesmodalites"></a>
+
+            <p>Merci de vous reporter à cette <a href="{% url 'rate_and_registration_activities' %}">section-là</a>
+                pour disposer des informations et modalités complémentaires.</p>
+
+        </div>
+        <!-- /. col -->
+
+    </div>
+    <!-- /. row-->
+
+</div>
+<!-- /.container -->
+{% endblock %}

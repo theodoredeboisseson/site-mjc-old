@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+
+    <!-- Page Content -->
+    <div class="container">
+
+    <!-- Page Heading -->
+    <h1 class="mt-4 mb-3">Actualité<small>Restez informé !</small></h1>
+    
+    <!-- Create News button if you are a superuser -->
+    {% if user.is_superuser %}
+        <a href="{% url 'create_news' %}" class="btn btn-info mb-4 text-capitalize">créer Article</a><br>
+    {% endif %}
+
+    <!-- Blog Post -->
+    {% for n in news %}
+        
+        <div class="card card-list-hover mb-4" onclick="goTo('{% url 'news_details' n.id %}')">
+                
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-md-6 img rounded" style="background-image:url('{{ MEDIA_URL }}{{ n.image }}')"></div>
+
+                    <div class="col-md-6">
+                        <h2 class="card-title">{{ n.title }}</h2>
+                        <p class="card-text">{{ n.content|linebreaks|truncatewords:100 }}</p>
+                        <a href="{% url 'news_details' n.id %}" class="btn btn-outline-danger">LIRE →</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card-footer text-muted">
+                  Publié le {{ n.published_date|date:" d.m.Y" }} par
+                  <a href="{% url 'about'    %}#team">l'équipe !</a>
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+  </div>
+  <!-- /.container -->
+
+{% endblock %}

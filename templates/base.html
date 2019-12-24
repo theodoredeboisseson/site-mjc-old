@@ -1,0 +1,370 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <meta property="og:title" content="MJC Mauguio" />
+    <meta property="og:url" content="https://mjcmauguiocarnon.herokuapp.com" />
+    <meta property="og:image" content="{{ STATIC_URL }}logo/logo-mjc.jpg" />
+
+    <!-- ICON -->
+    <link rel="shortcut icon" href="{{ STATIC_URL }}images/icon.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap-theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- SPECIFIC SCRIPTS -->
+    {% block specific_js %} {% endblock specific_js %}
+
+    <!-- TITLE BLOC TO IMPLEMENT -->
+    <title>MJC Mauguio-Carnon</title>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top py-0">
+
+        <div class="container">
+
+            <a class="navbar-brand" href="/"><img class="img-fluid logo rounded" alt="" src="{{ STATIC_URL }}logo/Optimized-logo-mjc.jpg"></a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+
+                <ul class="navbar-nav ml-auto">
+
+                    <!-- About -->
+                    <li id="dropdown_1A" class="nav-item dropdown cursor">
+
+                        <a class="nav-link dropdown-toggle" onclick="goToNavbar('{% url 'about' %}')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">L'ASSOCIATION</a>
+
+                        <div id="" class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item txt-white" href="{% url 'about' %}#mission">Qu'est-ce qu'une MJC ?</a>
+                            <a class="dropdown-item txt-white" href="{% url 'about' %}#team">L'Equipe</a>
+                            <a class="dropdown-item txt-white" href="{% url 'about' %}#documents">Documents</a>
+                        </div>
+
+                    </li>
+
+                    <!-- News -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'news_list' %}">ACTU</a>
+                    </li>
+
+                    <!-- Activities -->
+                    <li id="dropdown_1A" class="nav-item dropdown cursor">
+
+                        <a class="nav-link dropdown-toggle" onclick="goToNavbar('{% url 'a_list_of_animations_types' %}')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ACTIVITÉS</a>
+
+                        <div id="dropdown_1B" class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                            
+                            <a class="dropdown-item txt-white" href="{% url 'a_research' %}">Rechercher des activités</a>
+                            
+                            <div class="dropdown-divider"></div>
+                            
+                            <a class="dropdown-item txt-white" href="{% url 'a_list_of_animations_types' %}">Toutes les activités</a>
+
+                            {% for n in animations_types_activities %}
+                                <a class="dropdown-item txt-white text-capitalize" href="{% url 'a_list_of_animations' n.animation_type %}">{{ n.animation_type }} </a>
+                            {% endfor %}
+
+                            <div class="dropdown-divider"></div>
+
+                            <a class="dropdown-item txt-white" href="{% url 'rate_and_registration_activities' %}">Adhésion, Inscription & Tarifs</a>
+                            <a class="dropdown-item txt-white" href="{% url 'calendar_activities' %}">Calendrier des activités</a>
+                            <a class="dropdown-item txt-white" href="{% url 'venues_list' %}">Lieux & Salles</a>
+
+                        </div>
+
+                    </li>
+
+                    <!-- Workshops -->
+                    <li id="dropdown_2A" class="nav-item dropdown cursor">
+
+                        <a class="nav-link dropdown-toggle" onclick="goToNavbar('{% url 'w_list_of_animations_types' %}')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">STAGES</a>
+
+                        <div id="dropdown_2B" class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+
+                            <a class="dropdown-item txt-white" href="{% url 'w_list_of_animations_types' %}">Voir tous les stages</a>
+
+                            {% for n in animations_types_workshops %}
+                                <a class="dropdown-item txt-white text-capitalize" href="{% url 'w_list_of_animations' n.animation_type %}">{{ n.animation_type }}</a>
+                            {% endfor %}
+
+                            <div class="dropdown-divider"></div>
+
+                            <a class="dropdown-item txt-white" href="{% url 'rate_and_registration_workshops' %}">Inscription & Tarifs</a>
+                            <a class="dropdown-item txt-white" href="{% url 'venues_list' %}">Lieux & Salles</a>
+
+                        </div>
+
+                    </li>
+
+                    <!-- Events -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'list-of-all-events' %}">EVENEMENTS</a>
+                    </li>
+
+                    <!-- Youth -->
+                    <li class="nav-item dropdown cursor">
+
+                        <a class="nav-link dropdown-toggle" onclick="goToNavbar('{% url 'youth_mauguio' %}')" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">JEUNESSE</a>
+
+                        <div id="" class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                            
+                            <ul class="px-0 list-no-bullet">
+                                
+                                <li class="nav-item dropdown-menu-2">
+        
+                                    <a class="dropdown-item txt-white" onclick="goTo('{% url 'youth_mauguio' %}')">Mauguio</a>
+
+                                    <div id="" class="dropdown-submenu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item txt-white" href="{% url 'youth_mauguio' %}#educationalsupport">Accompagnement scolaire</a>
+                                        <a class="dropdown-item txt-white" href="{% url 'youth_mauguio' %}#locale">Local Jeunes</a>
+                                        <a class="dropdown-item txt-white" href="{% url 'youth_mauguio' %}#leisureactivities">ALSH Loisirs Jeunes</a>
+                                    </div>
+                                
+                                </li>
+                                
+                                <li class="nav-item dropdown-menu-2">
+                                
+                                    <a class="dropdown-item txt-white"  onclick="goTo('{% url 'youth_carnon' %}')">Carnon</a>
+
+                                    <div id="" class="dropdown-submenu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item txt-white" href="{% url 'youth_carnon' %}#educationalsupport-carnon">Accompagnement scolaire</a>
+                                        <a class="dropdown-item txt-white" href="{% url 'youth_carnon' %}#leisureactivities">ALSH : BRICOLO’ RIGOLOS</a>
+                                        <a class="dropdown-item txt-white" href="{% url 'youth_carnon' %}#servicefamille">Service Famille</a>
+                                        <a class="dropdown-item txt-white" href="{% url 'youth_carnon' %}#accueilados">Accueil Ados</a>
+                                    </div>
+                                    
+                                </li>
+                            
+                            </ul>
+                            
+                        </div>
+
+                    </li>
+
+                    <!-- Solidarity -->
+                    <li id="dropdown_1A" class="nav-item dropdown cursor">
+
+                        <a class="nav-link dropdown-toggle" onclick="goToNavbar('#')" id="navbarDropdownMenuLink" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">VIVRE ENSEMBLE</a>
+
+                        <div id="" class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item txt-white disabled" href="">Espace de vie sociale</a>
+                            <a class="dropdown-item txt-white" href="{% url 'list-of-all-socials' %}">Ateliers</a>
+                        </div>
+
+                    </li>
+
+                    <!-- Info -->
+                    <li id="dropdown_4A" class="nav-item dropdown cursor">
+
+                        <a class="nav-link dropdown-toggle" onclick="goToNavbar('{% url 'info' %}')" id="navbarDropdownMenuLink" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">INFOS PRATIQUES</a>
+
+                        <div id="dropdown_4B" class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item txt-white" href="{% url 'info' %}#contact">Nous Contacter</a>
+                            <a class="dropdown-item txt-white" href="{% url 'info' %}#openinghours">Nos Horaires</a>
+                            <a class="dropdown-item txt-white" href="{% url 'info' %}#findus">Nous Trouver</a>
+                        </div>
+
+                    </li>
+
+                    
+                    <!--Login features -->
+                    {% if user.is_authenticated %}
+                    <!--Profile: to put back again when client is ready -->
+                    <!--<li class="nav-item"><a class="nav-link"    href=""><svg class="svg-white svg-mini-1"-->
+                    <!--                                                                            enable-background="new 0 0 128 128"-->
+                    <!--                                                                            viewBox="0 0 128 128">-->
+                    <!--                                                                            <circle  class="userprofile" id="userProfileCircle" fill="#DD5600" cx="64" cy="64"  id="circle" r="64"/>-->
+                    <!--                                                                            <g id="icon">-->
+                    <!--                                                                                <path class="userprofile" id="userProfileUser" fill="white" d="M64,99h35c0-16-10.4-29-24.6-33.4C80.1,62,84,55.7,84,48.5c0-11-9-20-20-20 M64,28.5c-11,0-20,9-20,20c0,7.2,3.9,13.6,9.6,17.1C39.4,70,29,83,29,99h35"/>-->
+                    <!--                                                                                <path fill="white" d="M64,99h35c0-16-10.4-29-24.6-33.4C80.1,62,84,55.7,84,48.5c0-11-9-20-20-20 " id="right"/>-->
+                    <!--                                                                                <path fill="white" d="M64,28.5c-11,0-20,9-20,20c0,7.2,3.9,13.6,9.6,17.1C39.4,70,29,83,29,99h35" id="left"/>-->
+
+                    <!--                                                                            </g>-->
+                    <!--                                                                        </svg>-->
+                    <!--                                                                        </a>-->
+
+                    <!--</li>-->
+
+                    <!--Logout -->
+                    <li class="nav-item">
+                        <a class="nav-link"    href="{% url 'Logout'   %}" ><span class="badge-nav-hover-danger badge badge-pill badge-danger">Déco.</span></a>
+                    </li>
+
+                    {% if user.is_superuser %}
+                    <!--Admin panel -->
+                    <li class="nav-item">
+                        <a class="nav-link"    href="{% url 'admin_panel'   %}" target="_blank" ><span class="badge-nav-hover-danger badge badge-pill badge-light">Admin</span></a>                                                                                                </a>
+                    </li>
+                    {% endif %} {% else %}
+
+                    <!--Login -->
+                    <!--Login - badge version -->
+                    <!--<li class="nav-item"><a class="nav-link" href="{% url 'Login'    %}?next={{ request.path }}" ><span class="badge-nav-hover-warning badge badge-pill badge-warning">Se connecter</span></a>-->
+                    <!--</li>-->
+                    
+                    <!--Login - icon version -->
+                    <li class="nav-item">
+                        <a class="nav-link"    href="{% url 'Login'    %}?next={{ request.path }}">
+                            <span class="tooltip">
+                                <svg class="svg-white svg-mini-1 ml-5" enable-background="new 0 0 128 128" viewBox="0 0 128 128">
+                                    <circle  class="userprofile" id="userProfileCircle" fill="#DD5600" cx="64" cy="64"  id="circle" r="64"/>
+                                    <g id="icon">
+                                        <path class="userprofile" id="userProfileUser" fill="white" d="M64,99h35c0-16-10.4-29-24.6-33.4C80.1,62,84,55.7,84,48.5c0-11-9-20-20-20 M64,28.5c-11,0-20,9-20,20c0,7.2,3.9,13.6,9.6,17.1C39.4,70,29,83,29,99h35"/>
+                                    </g>
+                                </svg>
+                                <span class="tooltiptext-navbar text-nowrap">Log in</span>
+                            </span>
+                        </a>
+                    </li>
+
+                    <!--Register: to put back again when client is ready -->
+                    <!--<li class="nav-item"><a class="nav-link"    href="{% url 'Register' %}" ><span class="badge-nav-hover-warning badge badge-pill badge-warning">S'enregistrer</span></a>-->
+                    <!--</li>-->
+
+                    {% endif %}
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- Messages -->
+    {% for message in messages %}
+        <p class="text-center lead alert alert-dismissible alert-{{ message.tags }} my-0">{{ message }}</p>
+    {% endfor %}
+
+    <!-- Header -->
+    <header>
+        {% block header %} {% endblock %}
+    </header>
+
+    <!-- Section / Content -->
+    <section>
+        {% block content %} {% endblock %}
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer-bottom py-4 bg-dark">
+
+        <div class="container">
+
+            <p class="text-center text-white">
+
+                <!-- Name -->
+                <strong>MJC Mauguio Carnon</strong></p>
+                
+            <div class="row text-center">
+
+                    <div class="col-xs-6 col-sm-3 offset-sm-1 px-3 py-3">
+                        <img class="footer-logo-1 rounded" alt="" src="{{ STATIC_URL }}logo/Optimized-logo-mjc.jpg">
+                    </div>
+
+                    <div class="col-xs-12 col-sm-4 px-3 py-3">
+
+                        <p class="text-center text-white">
+                
+                            <!-- Map link -->
+                            <a class="" href="https://goo.gl/maps/hyZBdUHhrWz" target="_blank">
+                                        <svg    class="svg-mini-1"
+                                                enable-background="new 0 0 136 135.099"
+                                                viewBox="0 0 136 135.099">
+                                                <g>
+                                                <path class="mappinfooter" fill="#284A9F"   d="M4.667,67.549c0-34.98,28.355-63.334,63.332-63.334c34.979,0,63.334,28.354,63.334,63.334   c0,34.976-28.355,63.333-63.334,63.333C33.022,130.882,4.667,102.525,4.667,67.549z"/>
+                                                <path class="mappinfooter" fill="#24488E"   d="M112.966,22.947c24.733,24.734,24.735,64.833,0,89.568c-24.732,24.732-64.834,24.732-89.568,0   L112.966,22.947z" />
+                                                <g>
+                                                <path class="mappinfooter" fill="#1E3F77"  d="M129.405,83.09L84.739,38.423l-9.075,9.075l-19.331-2.664l1.997,19.998l-9.407,9.407L67.926,93.24    l0.331,12.998L89.24,127.22C108.989,120.189,124.22,103.642,129.405,83.09z" />
+                                                </g>
+                                                <path class="mappinfooter" id="mappinfooterID" fill="red"  d="M92.617,50.709c-0.263-0.988-0.798-2.04-1.193-2.961   c-4.738-11.384-15.088-15.464-23.445-15.464c-11.188,0-23.511,7.5-25.156,22.966v3.159c0,0.131,0.045,1.315,0.111,1.908   c0.922,7.37,6.736,15.202,11.079,22.571c4.672,7.896,9.521,15.662,14.325,23.428c2.961-5.066,5.912-10.199,8.807-15.137   c0.789-1.447,1.705-2.895,2.495-4.276c0.525-0.921,1.531-1.843,1.991-2.698c4.672-8.554,12.192-17.176,12.192-25.665v-3.488   C93.822,54.132,92.683,50.907,92.617,50.709z M68.183,66.568c-3.289,0-6.888-1.645-8.665-6.186   c-0.265-0.723-0.244-2.171-0.244-2.304v-2.041c0-5.789,4.917-8.422,9.193-8.422c5.265,0,9.336,4.211,9.336,9.476   C77.803,62.358,73.447,66.568,68.183,66.568z" />
+                                                </g>
+                                        </svg>
+                            </a>
+                                                
+                            <!-- Adress -->
+                            <span class="text-nowrap">527 Avenue du 8 Mai 1945,</span>
+                            <span class="text-nowrap">34130 Mauguio, France</span>
+                
+                            <!-- Phone -->
+                            <span class="text-nowrap"> &bull; Tel. 04.67.29.34.99 </span>
+                
+                            <!-- Mail -->
+                            <span class="text-nowrap unselectable"> &bull; secr<span class="rev">rf.non<!-- random comment -->racoiuguamcjm</span><!-- random comment --><span class="revnull">tklo</span>@<!-- random comment --><span class="rev">tairate</span></span>
+                
+                        </p>
+                        
+                    </div>
+
+                    <div class="col-xs-6 col-sm-3 px-3 py-3">
+                        <img class="footer-logo-1 rounded" alt="" src="{{ STATIC_URL }}logo/logo-ville-fond-blanc-paysage.png">
+                    </div>
+
+                </div>
+                
+                <p class="text-white mt-4 text-center"><strong>Affiliations & Partenaires</strong></p>
+
+                <div class="row text-center">
+
+                    <div class="col-xs-6 col-sm-3 px-3 py-3">
+                        <img class="footer-logo-1 rounded" alt="" src="{{ STATIC_URL }}legal/logo-federation-mjc-white.png">
+                    </div>
+
+                    <div class="col-xs-6 col-sm-3 px-3 py-3">
+                        <img class="footer-logo-1 rounded" alt="" src="{{ STATIC_URL }}legal/logo_jeunesse_et_sport.jpg">
+                    </div>
+
+                    <div class="col-xs-6 col-sm-3 px-3 py-3">
+                        <img class="footer-logo-1 rounded" alt="" src="{{ STATIC_URL }}legal/Logo_Ca_du_Pays_de_lOr.png">
+                    </div>
+
+                    <div class="col-xs-6 col-sm-3 px-3 py-3">
+                        <img class="footer-logo-1 rounded" alt="" src="{{ STATIC_URL }}legal/logo_ca_ herault.jpg">
+                    </div>
+
+                </div>
+
+                <p class="text-white mt-4 text-center"><strong>Accessible handicap</strong></p>
+
+                <div class="row">
+                    <div class="col-xs-12 px-3 py-3 atcha"><img class="footer-logo-2 img-fluid rounded" alt="" src="{{ STATIC_URL }}legal/MJC- logos-handicap.jpg"></div>    
+                </div>
+
+        </div>
+            
+            
+
+        </div>
+        <!-- /.container -->
+
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+
+    <!-- Custom scripts -->
+    <script src="{% static 'js/ux.js' %}"></script>
+
+
+</body>
+
+</html>

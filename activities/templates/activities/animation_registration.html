@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+
+    <!-- Page Content -->
+    <div class="container">
+        
+        <div class="col-md-12">  
+        
+            <h1 class="mt-4 mb-3">Inscription</h1>
+            
+            <p>Vous êtes sur le point de vous inscrire au créneau suivant : </p>
+            <p><strong><span class="text-nowrap"> {{ animation.name }}</span></strong></br>
+            
+            <!-- Table -->
+            <table class="table table-primary table-hover text-center mt-3 mb-5">
+                
+                <thead>
+                      
+                    <tr class="bg-danger text-white">
+                        <th scope="col">Nom</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Niveau</th>
+                        <th scope="col">Jour</th>
+                        <th scope="col">Horaires</th>
+                        <th scope="col">Anim.</th>
+                        <th scope="col">Salle</th>
+                        <th scope="col">
+                            <span class="text-nowrap tooltip">MC
+                                <span class="tooltiptext">Tarifs pour les résidents de Mauguio-Carnon</span>
+                                <svg class="svg-mini-05 svg-blue" data-name="Layer 1" viewBox="0 0 32 32">
+                                    <path class="cls-1" d="M16,1A15,15,0,1,0,31,16,15,15,0,0,0,16,1Zm2,22a2,2,0,0,1-4,0V16a2,2,0,0,1,4,0ZM16,12.19A2.19,2.19,0,1,1,18.19,10,2.19,2.19,0,0,1,16,12.19Z"/>
+                                </svg>
+                            </span>
+                        </th>
+                        <th scope="col">
+                            <span class="text-nowrap tooltip">Hors MC
+                                <span class="tooltiptext">Tarifs pour les résidents hors commune</span>
+                                <svg class="svg-mini-05 svg-blue" data-name="Layer 1" viewBox="0 0 32 32">
+                                    <path class="cls-1" d="M16,1A15,15,0,1,0,31,16,15,15,0,0,0,16,1Zm2,22a2,2,0,0,1-4,0V16a2,2,0,0,1,4,0ZM16,12.19A2.19,2.19,0,1,1,18.19,10,2.19,2.19,0,0,1,16,12.19Z"/>
+                                </svg>
+                            </span>
+                        </th>
+                    </tr>
+                    
+                </thead>
+                
+                <tbody>
+                    
+                        <tr class={% if slot.room.venue.city.id == 2 %}"table-warning"{% endif %}>
+                            
+                            <!--Badge - New -->
+                            <!--<td>{% if slot.new %}<span class="badge badge-pill badge-success">N</span>{% endif %}</td>        -->
+                            
+                            <!-- Slot name-->
+                            <td>{% if slot.name|length > 0%}{{ slot.name }}{% else%}-{% endif %}</td>
+                            
+                            <!-- Age -->
+                            <td>
+                                <span class="text-nowrap">
+                                {% if slot.age_group.age_min == slot.age_group.age_max %}
+                                    {{ slot.age_group.age_min }}
+                                {% else %}
+                                    {{ slot.age_group.age_min }} / {{ slot.age_group.age_max }}
+                                {% endif %}
+                                </span>
+                            </td>
+                            
+                            <!-- Level -->
+                            <td>{% if slot.level is not None %}{{ slot.level }}{% else%}-{% endif %}</td>
+                            
+                            <!-- Day -->
+                            <td>{{ slot.day }}{% if slot.notes|length > 0 %} *{% endif %}</td>
+                            
+                            <!-- Hours -->
+                            <td>
+                                <span class="text-nowrap">{{ slot.time_start|time:"H:i"}} /</span>
+                                <span class="text-nowrap">{{ slot.time_end|time:"H:i"}}</span>
+                            </td>
+                            
+                            <!-- Hosts-->
+                            <td>
+                                {% for host in slot.host.all %}
+                                       <span class="text-uppercase"> {{ host.initials }}</span>
+                                {% endfor %}
+                            </td>
+                            
+                            <!-- Venue - Room -->
+                            <td>
+                                <a href="{% url 'venue' slot.room.venue.name %}">{{ slot.room.venue.name }}<br>{% if slot.room.room_nb is None %}{% else %}{{ slot.room.room_nb }}{% endif %}{% if slot.room.room_nb and slot.room.room_name  %} - {% endif%}{% if slot.room.room_name is None %}{% else %}{{ slot.room.room_name }}{% endif %}</a>
+                            </td>
+                            
+                            <!-- Rate - Residents -->
+                            <td>
+
+                                <span class="text-nowrap tooltip">
+                                        {% if slot.rate_resident_1 is None %}{% else %}{{ slot.rate_resident_1 }} € {% endif %}<svg class="svg-mini-05 svg-blue" data-name="Layer 1" viewBox="0 0 32 32"><path class="cls-1" d="M16,1A15,15,0,1,0,31,16,15,15,0,0,0,16,1Zm2,22a2,2,0,0,1-4,0V16a2,2,0,0,1,4,0ZM16,12.19A2.19,2.19,0,1,1,18.19,10,2.19,2.19,0,0,1,16,12.19Z"/></svg>
+                                        <span class="tooltiptext">- Tarif 1 MC -<br>{% if slot.rate_resident_1 is None and slot.rate_resident_1_name is None %}{{ unmentionned_rate_text }}{% elif slot.rate_resident_1 is not None and slot.rate_resident_1_name is None %}{% else %}{{ slot.rate_resident_1_name }}{% endif %}</span>
+                                </span>
+
+                                <br>
+
+                                <span class="text-nowrap tooltip">
+                                        {% if slot.rate_resident_2 is None %}{% else %}{{ slot.rate_resident_2 }} € <svg class="svg-mini-05 svg-blue" data-name="Layer 1" viewBox="0 0 32 32"><path class="cls-1" d="M16,1A15,15,0,1,0,31,16,15,15,0,0,0,16,1Zm2,22a2,2,0,0,1-4,0V16a2,2,0,0,1,4,0ZM16,12.19A2.19,2.19,0,1,1,18.19,10,2.19,2.19,0,0,1,16,12.19Z"/></svg>{% endif %}
+                                        <span class="tooltiptext">- Tarif 2 MC -<br>{% if slot.rate_resident_2 is None and slot.rate_resident_2_name is None %}{{ unmentionned_rate_text }}{% elif slot.rate_resident_1 is not None and slot.rate_resident_2_name is None %}{{ two_rates_no_info_on_second_rate }}{% else %}{{ slot.rate_resident_2_name }}{% endif %}</span>
+                                </span>
+                              
+                            </td>
+                            
+                            <!-- Rate - Non Residents -->
+                            <td>
+
+                                <span class="text-nowrap tooltip">
+                                        {% if slot.rate_non_resident_1 is None %}{% else %}{{ slot.rate_non_resident_1 }} € {% endif %}<svg class="svg-mini-05 svg-blue" data-name="Layer 1" viewBox="0 0 32 32"><path class="cls-1" d="M16,1A15,15,0,1,0,31,16,15,15,0,0,0,16,1Zm2,22a2,2,0,0,1-4,0V16a2,2,0,0,1,4,0ZM16,12.19A2.19,2.19,0,1,1,18.19,10,2.19,2.19,0,0,1,16,12.19Z"/></svg>
+                                        <span class="tooltiptext">- Tarif 1 Hors MC -<br>{% if slot.rate_resident_1 is None and slot.rate_non_resident_1_name is None %}{{ unmentionned_rate_text }}{% elif slot.rate_non_resident_1 is not None and slot.rate_non_resident_1_name is None %}{% else %}{{ slot.rate_non_resident_1_name }}{% endif %}</span>
+                                </span>
+
+                                <br>
+
+                                <span class="text-nowrap tooltip">
+                                        {% if slot.rate_non_resident_2 is None %}{% else %}{{ slot.rate_non_resident_2 }} € <svg class="svg-mini-05 svg-blue" data-name="Layer 1" viewBox="0 0 32 32"><path class="cls-1" d="M16,1A15,15,0,1,0,31,16,15,15,0,0,0,16,1Zm2,22a2,2,0,0,1-4,0V16a2,2,0,0,1,4,0ZM16,12.19A2.19,2.19,0,1,1,18.19,10,2.19,2.19,0,0,1,16,12.19Z"/></svg>{% endif %}
+                                        <span class="tooltiptext">- Tarif 2 Hors MC -<br>{% if slot.rate_non_resident_2 is None and slot.rate_non_resident_2_name is None %}{{ unmentionned_rate_text }}{% elif slot.rate_non_resident_1 is not None and slot.rate_non_resident_2_name is None %}{{ two_rates_no_info_on_second_rate }}{% else %}{{ slot.rate_non_resident_2_name }}{% endif %}</span>
+                                </span>
+
+                            </td>
+                            
+                        </tr>
+                    
+                </tbody>
+                
+            </table>
+            
+            <!--<span class="text-danger">Le participant qui sera inscrit est l'utilisateur connecté : -->
+            <!--<strong><span class="text-nowrap">{{ user.first_name }} {{ user.last_name  }}</span></strong>.-->
+            
+            <!--<br>Si vous voulez enregistrer votre enfant, merci de vous connecter avec son compte.</br> Si vous souhaitez enregistrer plusieurs personne, merci de vous enregistrer avec chacun des comptes. </span></br>-->
+            
+            <p>La selection du tarif se fait à la page suivante. Si vous souhaitez continuer, cliquer sur  "Aller au paiement".</p>
+            
+            <div class="mt-3">
+                
+                <form method="POST" action="{% url 'checkout' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="slot_id" value="{{ slot.id }}"/>
+                    <input class="btn btn-outline-success text-uppercase" type="submit" value="Aller au paiement"/>
+                </form>
+                
+            </div>
+            
+            <div class="mt-3">
+                <button class="btn btn-outline-danger mt-3 text-uppercase" onclick="goBack()">Annuler</button>
+            </div>
+            
+        </div>
+    </div>
+    <!-- /.container --> 
+
+{% endblock %}

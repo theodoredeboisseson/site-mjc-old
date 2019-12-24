@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load bootstrap_tags %}
+{% block content %}
+    
+    <!-- Page Content -->
+    <div class="container">
+        
+        <div class="col-md-4 offset-md-4"> 
+            
+            <h1 class="mt-4 mb-3">Login</h1>
+            
+            <form method="POST">
+                
+                {% csrf_token %}
+                {{ form | as_bootstrap }}
+                
+                <input type="submit" value="LOGIN" class="nounderline btn btn-outline-warning btn-lg btn-block">
+                
+            </form>
+            
+            <hr>
+            
+            <!--<p>If you don't have an account yet, <a href="{% url 'Register' %}">register</a> ! </p>-->
+            
+        </div>
+        
+    </div>
+
+{% endblock content %}

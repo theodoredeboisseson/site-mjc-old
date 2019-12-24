@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+
+    <!-- Page Content -->
+    <div class="container">
+        
+        <div class="col-md-4 offset-md-4">  
+
+            <h1 class="mt-4 mb-3 text-danger">Registration denied</h1>
+            
+            <p>You don't have access to the registration for the following reason : </br> {{ error }}</p>
+
+            <form method="GET" action="{% url 'Login' %}">
+                <input type="hidden" name="next" value="{{ request.path }}"/>
+                <input type="submit" class="btn btn-outline-warning btn-lg btn-block mt-3" value="Login with another account" />
+            </form>
+           
+            <button class="btn btn-primary btn-lg btn-block mt-3" onclick="goBack()">Back to event page</button>
+
+        </div>
+
+    </div>
+    <!-- /.container --> 
+
+{% endblock %}

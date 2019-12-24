@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load bootstrap_tags %}
+{% block content %}
+
+    <!-- Page Content -->
+    <div class="container">
+
+            <h1 class="mt-4 mb-3">Profile</h1>
+            
+            <p><span class="text-capitalize"><strong>{{ user.first_name }}</strong></span>, welcome to your profile page.</p>
+            
+            <h4>Your personal information:</h4>
+
+            <p>
+                First name: <strong>{{ user.first_name }}</strong></br>
+                Last name:  <strong>{{ user.last_name }}</strong></br>
+                Adherent #: <strong>{{ user.Profile.adherent_number }}</strong></br>
+                Rate coeff: <strong>{{ user.Profile.rate_coefficient }}</strong>
+            </p>
+    
+            <h4>Your registrations:</h4>
+            
+            <div class="row">
+
+                {% for eventRegisteredto in eventsRegisteredTo %}
+
+                    <div class="col-md-6 col-lg-4">
+
+                        <div  class="card card text-white mb-3
+                              {% if eventRegisteredto.event.event_type.event_type == 'ACTIVITY' %}
+                                bg-danger"
+
+                              {% elif eventRegisteredto.event.event_type.event_type == 'TRAININGCOURSE' %}
+                                bg-primary"
+
+                              {% elif eventRegisteredto.event.event_type.event_type == 'EVENT' %}
+                                 bg-dark"
+
+                              {% endif %}>
+
+                            <div class="card-header text-center text-uppercase"><strong>{{ eventRegisteredto.event.name }}</strong></div>
+
+                            <div class="card-body">
+
+                                <table class="table table-hover">
+                                    <tbody>
+                                        <tr>
+                                          <th scope="row">Category</th>
+                                          <td>{{ eventRegisteredto.event.event_type.title }} / {{ eventRegisteredto.event.event_subtype }}</td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">Period</th>
+                                          <td>{{ eventRegisteredto.event.period }}</td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">Age</th>
+                                          <td>{{ eventRegisteredto.event.age_group }}</td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">Level</th>
+                                          <td>{{ eventRegisteredto.event.level }}</td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">Max group size</th>
+                                          <td>{{ eventRegisteredto.event.number_max }}</td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">Host</th>
+                                          <td><a href="{% url 'host' eventRegisteredto.event.host.id %}">{{ eventRegisteredto.event.host }}</a></td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">Day</th>
+                                          <td>{{ eventRegisteredto.event.day }}</td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">Time</th>
+                                          <td>{{ eventRegisteredto.event.time_start }} / {{ eventRegisteredto.event.time_end }}</td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">
+                                              <span class="mr-3">Venue</span>
+                                              <a href="{{ eventRegisteredto.event.room.venue.url_map }}" target="_blank">
+                                                <img class="svg-mini-1" src="{{ STATIC_URL }}/svg/desgin-map-pin.svg">
+                                              </a>
+                                          </th>
+                                          <td>
+                                              <a href="{% url 'venue' eventRegisteredto.event.room.venue.name %}">{{ eventRegisteredto.event.room }}</a>
+                                          </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+            </div>
+        
+    </div>
+    
+{% endblock content%}

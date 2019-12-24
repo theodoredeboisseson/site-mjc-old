@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+
+{% block content %}
+
+    <div class="container">
+
+    <h1 class="mt-5 mb-3">Espace de vie sociale<br><small></small></h1>
+
+    <p class="lead">La MJC propose des ateliers pour mieux vivre ensemble.</p>
+
+    <p class="lead mb-5">Ci-dessous ce qui vous est proposé :</p>
+    
+    <!-- Evenement -->
+    {% for social in socials %}
+        <div class="card mb-4 card-list-hover" onclick="goTo('{% url 'social_details' social.id %}')">
+            
+            <div class="card-body">
+                
+                <div class="row">
+                    
+                    <div class="rounded col-md-5">
+                        <img class="rounded img-tumbnail-event" src="{{MEDIA_URL}}{{ social.image }}" alt="">
+                    </div>
+                    
+                    <div class="col-md-7">
+                        <h2 class="mt-0 card-title text-danger"><i>{{ social.family }}</i></h2>
+                        <h2 class="mt-0 card-title">{{ social.title }}</h2>
+                        <p class="card-text text-uppercase">  {{ social.date_and_time }}</p>
+                        <p class="card-text lead">  {{ social.subtitle }}</p>
+                        <a href="{% url 'social_details' social.id %}" class="btn btn-warning">En savoir + </a>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+    {% endfor %}
+
+  </div>
+  <!-- /.container -->
+
+{% endblock %}

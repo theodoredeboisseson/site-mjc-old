@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Heading -->
+        <h1 class="mt-5 mb-3">Evénements à venir<br><small></small></h1>
+
+        <p class="lead mb-5">La MJC propose tout un ensemble de rencontres, de découvertes,
+            pour les enfants, les ados et pour les adultes.<br>
+            Voici ce qui vous est proposé prochainement !</p>
+
+        <!-- Evenement -->
+        {% for event in events_coming %}
+        <div class="card mb-4 card-list-hover" onclick="goTo('{% url 'event_details' event.id %}')">
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="rounded col-md-5">
+                        <img class="rounded img-tumbnail-event" src="{{MEDIA_URL}}{{ event.image }}" alt="">
+                    </div>
+
+                    <div class="col-md-7">
+                        <h2 class="mt-0 card-title text-danger"><i>{{ event.family }}</i></h2>
+                        <h2 class="mt-0 card-title">{{ event.title }}</h2>
+                        <p class="card-text text-uppercase">  {{ event.date_and_time }}</p>
+                        <p class="card-text lead">  {{ event.subtitle }}</p>
+                        <a href="{% url 'event_details' event.id %}" class="btn btn-warning">En savoir + </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+        <h1 class="mt-5 mb-3">Evénements passés<br><small></small></h1>
+
+        {% for event in events_past %}
+        <div class="card mb-4 card-list-hover" onclick="goTo('{% url 'event_details' event.id %}')">
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="rounded col-md-5"  onclick="goTo('{% url 'event_details' event.id %}')">
+                        <img class="rounded img-tumbnail-event" src="{{MEDIA_URL}}{{ event.image }}" alt="">
+                    </div>
+
+                    <div class="col-md-7">
+                        <h2 class="mt-0 card-title text-danger"><i>{{ event.family }}</i></h2>
+                        <h2 class="mt-0 card-title">{{ event.title }}</h2>
+                        <p class="card-text text-uppercase">{{ event.date_and_time }}</p>
+                        <p class="card-text lead">{{ event.subtitle }}</p>
+                        <a href="{% url 'event_details' event.id %}" class="btn btn-warning">En savoir + </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+    <!-- /.container -->
+
+{% endblock %}

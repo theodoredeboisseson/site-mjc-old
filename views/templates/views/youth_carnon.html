@@ -1,0 +1,84 @@
+{% extends 'base.html' %} {% load static from staticfiles %} {% block content %}
+
+<!-- Page Content -->
+<div class="container">
+
+
+
+    <div class="row">
+
+        <div class="col-md-8 offset-md-2">
+
+            <h1 class="mt-5 mb-5">JE SUIS JEUNE, <br>LA MJC DE <span class="text-danger">CARNON</span><br> ME PROPOSE...<small></small></h1>
+
+            <a href="{% url 'youth_mauguio' %}"><p class="text-right text-danger"><i>Si je suis à Mauguio...</i></p></a>
+            
+            <hr>
+
+            <p><strong>Menu</strong></p>
+            <a href="#educationalsupport-carnon"><strong>Accompagnement scolaire</strong></a><br>
+            <a href="#locale"><strong>ALSH : «BRICOLO’ RIGOLOS» (Accueil Loisirs Sans Hébergement)</strong></a><br>
+            <a href="#servicefamille"><strong>Service Famille</strong></a><br>
+            <a href="#accueilados"><strong>Accueil Ados</strong></a>
+
+            <hr>
+            
+            <h2>Accompagnement scolaire</h2>
+            
+            <a class="anchor" id="educationalsupport-carnon"></a>
+            
+            <p>Dans le cadre du dispositif Contrats Locaux d’Accompagnement Scolaire (CLAS), en partenariat avec
+                la municipalité, l’école primaire et la CAF, la MJC propose un accompagnement des enfants et de
+                leur famille, tout au long de l’année.</p>
+
+            <p>Renseignements :</p>
+
+            <ul>
+                <li class="mt-3">Auprès des enseignants de l'école primaire</li>
+                <li class="mt-3">A la MJC, auprès des animatrices Amandine et Bettina</li>
+            </ul>
+            
+            <h2>ALSH : «Bricolo’ Rigolos» <br><small>(Accueil Loisirs Sans Hébergement)</small></h2>
+            
+            <a class="anchor" id="bricolo"></a>
+            
+            <p>Accueil des enfants de 6 à 11 ans pour des loisirs créatifs basés sur des activités manuelles
+                artistiques, des jeux d’expression et des initiations sportives. Responsable : Amandine MORERE.</p>
+
+            <p>Les Loisirs Jeunes proposent aussi des rendez-vous en dehors des vacances scolaires : soirée pizza
+                (vidéo, costumée, jeux...) le premier mercredi de chaque mois et une sortie culturelle par trimestre.
+                Un calendrier trimestriel des différentes animations sera proposé.</p>
+
+            <p>Lieu : MJC annexe de Carnon Horaire : 8h30 - 12h / 14h - 18h, durant les vacances
+                scolaires (sauf Noël et août).</p>
+
+            <p>Possibilité d’apporter son repas.</p>
+
+            <p>Tarif : calculé selon le revenu familial (dernier avis d’imposition) et Aides aux Loisirs CAF.</p>
+
+            <p>Programme détaillé disponible à l’accueil.</p>
+
+            <h2>Service Famille<br><small></small></h2>
+            
+            <a class="anchor" id="servicefamille"></a>
+            
+            <p>Pedibus : Le personnel de la MJC peut récupérer à l’école de Carnon, de 16h15 jusqu’à 17h30,
+                les enfants qui sont inscrits à une de nos activités.</p>
+            
+            <h2>Accueil Ados<br><small>dès 11 ans</small></h2>
+            
+            <a class="anchor" id="accueilados"></a>
+            
+            <p>Rencontre tous les mecredis, de 18h45 à 19h45, avec l'animatrice Charline, à la MJC annexe de Carnon.
+                Venez faire connaissance, parler de vos souhaits de loisirs, vos projets, échanger et peut-être
+                préparer un programme sympa pour les prochaines vacances scolaires ! A bientôt ! (Accès libre)</p>
+            
+        </div>
+        <!-- /. col -->
+
+    </div>
+    <!-- /. row-->
+
+</div>
+<!-- /.container -->
+{% endblock %}

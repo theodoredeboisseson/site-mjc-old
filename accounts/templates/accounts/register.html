@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap_tags %}
+{% block content %}
+
+    <!-- Page Content -->
+    <div class="container">
+        
+        <div class="col-md-4 offset-md-4"> 
+            
+            <h1 class="mt-4 mb-3">Register</h1>
+            
+            <form method="post" enctype="multipart/form-data">
+                    
+                {% csrf_token %}
+                {{ user_form    | as_bootstrap }}
+                {{ profile_form | as_bootstrap }}
+                <input type="submit" value="REGISTER" class="nounderline btn btn-outline-warning btn-lg btn-block">        
+                
+            </form>
+            
+        </div>
+        
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+
+    <!-- Page Content -->
+    <div class="container">
+        
+        <div class="col-md-6 offset-md-3 mb-5">
+            
+            <h1 class="mt-4 mb-3 text-success">Vous êtes enregistrés !</h1>
+            
+            <p>Nous sommes contents de vous avoir parmis nous !</br>
+            Si vous avez des question, n'hésitez pas à contacter <a  href="{% url 'about' %}#team">l'équipe</a>.</p>
+            
+            <p>Retour à la <a href="/">page d'accueil</a>.</p>
+        
+        </div>
+    
+    </div>
+    <!-- /.container -->
+
+{% endblock %}

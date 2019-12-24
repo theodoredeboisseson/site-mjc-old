@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-8 offset-md-2">
+
+            <div class="mt-5">
+                <img class="img-fluid rounded mb-4" src="{{ STATIC_URL }}images/Mauguio-Carnon.jpg" alt="">
+            </div>
+            
+            <h1 class="mt-5 mb-3">Calendrier des activités</h1>
+
+            <p>La période d’activité va <strong>du 10 septembre 2018 au 30 juin 2019</strong>,
+                sauf exception indiquée devant l’activité.</p>
+            
+            <p>Interruption des activités pendant les vacances scolaires, jours fériés ou
+                ponts décidés par le Conseil d’Administration de la MJC,
+                <strong>sauf pour la Gymnastique adulte (voir ligne suivante)</strong>.</p>
+            
+            <p>Pour la gym, prolongation des cours durant la première semaine des vacances
+                scolaires (sauf Noël) avec Alexandre MAURETTE (demander le calendrier à l’accueil MJC).</p>
+            
+            <p>Consultez <a href="{% url 'info'    %}#openinghours">les horaires d’accueil administratif</a>,
+                ils varient selon les périodes de l’année. Ils sont différents des horaires des activités.</p>
+
+            <p class="text-success"><strong>Certaines activités sont proposées entre 12h et 14h à Mauguio,
+                pensez-y !</strong></p>
+            
+            <p class="text-success"><strong>N’oubliez pas de consulter les activités proposées à la MJC annexe
+                de Carnon et vice-versa… Vous pouvez y trouver une activité qui n’existe pas à Mauguio ou y
+                découvrir un créneau horaire qui vous convient mieux !</strong></p>
+
+            <div class="row">
+
+                <!-- Dates -->
+                <div class="col-md-12">
+
+                    <!-- Coordonnées -->
+                    <table class="table table-hover text-center mt-4">
+                        <tr>
+                            <th>Calendrier de fonctionnement des activités<br>Saison 2018/2019</th>
+                        </tr>
+                        <tr>
+                            <td class="text-success">Du lundi 10 septembre au samedi 20 octobre 2018</td>
+                        </tr>
+                        <tr>
+                            <td class="text-danger">- Vacances de la Toussaint -</td>
+                        </tr>
+                        <tr>
+                            <td class="text-success">Du lundi 05 novembre au samedi 22 décembre 2018</td>
+                        </tr>
+                        <tr>
+                            <td class="text-danger">- Vacances de la Noël -</td>
+                        </tr>
+                        <tr>
+                            <td class="text-success">Du lundi 07 janvier au samedi 23 février 2019</td>
+                        </tr>
+                        <tr>
+                            <td class="text-danger">- Vacances d'hiver -</td>
+                        </tr>
+                        <tr>
+                            <td class="text-success">Du lundi 11 mars 2019 au samedi 20 avril 2019</td>
+                        </tr>
+                        <tr>
+                            <td class="text-danger">- Vacances de Pâques -</td>
+                        </tr>
+                        <tr>
+                            <td class="text-success">Du lundi 6 mai au samedi 29 juin 2019</td>
+                        </tr>
+                        <tr>
+                            <td class="text-danger">- Vacances d'été -</td>
+                        </tr>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- /.container -->
+
+{% endblock %}
