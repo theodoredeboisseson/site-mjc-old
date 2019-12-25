@@ -31,16 +31,6 @@ function goToNavbar(url) {
     }
 }
 
-// Active navbar 
-// $(document).ready(function () {
-//     var url = window.location;
-//     $('ul li a[href="'+ url +'"]').parent().addClass('active');
-//     $('ul li a').filter(function() {
-//          return this.href == url;
-//     }).parent().addClass('active');
-// });
-
-
 // Go back button
 function goBack() {
         window.history.back();
@@ -168,23 +158,6 @@ function FilterActivities(value,filter,category) {
     
 }
 
-// function dataFilterAND(array) {
-    
-//     // Show only those with all listed filters
-//     let filtersString = "";
-//     let l = array.length
-    
-//     for (i=0 ; i < l ; i++) {
-        
-//         // jQuery selector ("AND")
-//         filtersString += "[data-filter*=" + array[i] + "]"
-        
-//     };
-    
-//     return filtersString
-    
-// }
-
 function dataFilterOR(array, attribute) {
     
     // Show only those with listed filters
@@ -254,27 +227,6 @@ function filterRemove(array, filter) {
     };
 };
 
-// function TimeStartfilterShow(time, timer) {
-    
-//     $('[data-filter-time-start]').filter(function() {
-//         return $(this).attr("data-filter-time-start") <= (parseInt(time)+4);}).filter(function() {
-//         return $(this).attr("data-filter-time-start") >= parseInt(time);}).show(timer);
-
-    // $('[data-filter-time-start]').filter(function() {
-    //     return $(this).attr("data-filter-time-start") <= parseInt(time)+4;}).show(timer);
-//  }
-
-// function TimeStartfilterHide(time, timer) {
-        
-//     $('[data-filter-time-start]').filter(function() {
-//         return $(this).attr("data-filter-time-start") <= (parseInt(time)+4);}).filter(function() {
-//         return $(this).attr("data-filter-time-start") >= parseInt(time);}).hide(timer);
-        
-    // $('[data-filter-time-start]').filter(function() {
-    //     return $(this).attr("data-filter-time-start") <= parseInt(time)+4;}).hide(timer);
-// }
-
-
 
 function Initialisation() {
       $('.filter-initialisation').hide(); 
@@ -282,12 +234,3 @@ function Initialisation() {
 
 window.onload = Initialisation() 
 
-
-// Custom function to append a string to an attribute
-// $.fn.appendAttr = function(attrName, suffix) {
-//     this.attr(attrName, function(i, val) {
-//         return val + ' ' + suffix;
-//     });
-//     return this;
-// };
-// $('[data-filter*='+filter+']').appendAttr('data-filter-activated', filter);
