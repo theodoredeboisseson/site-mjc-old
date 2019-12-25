@@ -5,7 +5,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['mjcmauguiocarnon.herokuapp.com', 'mjc-mauguio-carnon.com', 'www.mjc-mauguio-carnon.com']
+ALLOWED_HOSTS = ['mjcmauguiocarnon.fr', 'mjc-mauguio-carnon.com', 'www.mjc-mauguio-carnon.com', os.environ.get('HOST')]
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
