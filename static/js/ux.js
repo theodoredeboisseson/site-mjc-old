@@ -155,7 +155,8 @@ function FilterActivities(value,filter,category) {
         lines.show(timer);
 
 
-        hideEmptyTables();
+        hideEmptyAnimations();
+        hideEmptyTypes();
 
 }
 
@@ -230,9 +231,9 @@ function filterRemove(array, filter) {
 };
 
 
-function hideEmptyTables() {
+function hideEmptyAnimations() {
 
-    $(".wrapper-search").each(function() {
+    $(".wrapper_animation").each(function() {
 
         var lines_all = $(this).find("table>tbody>tr");
         var lines_hidden = $(this).find("table>tbody>tr[style='display: none;']");
@@ -244,6 +245,23 @@ function hideEmptyTables() {
         }
 
     })
+
+};
+
+function hideEmptyTypes() {
+ 
+    $(".wrapper_type").each(function() {
+     
+        var animations = $(this).find(".wrapper_animation");
+        var animations_hidden = $(this).find(".wrapper_animation[style='display: none;']");
+
+        if (animations.length == animations_hidden.length) {
+            $(this).hide();
+        } else {
+            $(this).show();
+        }
+    
+    });
 
 };
 
