@@ -11,6 +11,7 @@
         <div class="row my-5">
             <div class="col-md-12 text-center">
                 <h1>Rechercher une activité</h1>
+                <button onclick="hideEmptyTables()">foo()</button>
             </div>
         </div>
 
@@ -119,153 +120,157 @@
                                     
                                 {% for animation in animations_list %}
                                     
-                                    <h2 class="mt-4 mb-3">{{ animation.grouper }}</h2>
-                                        
-                                    <!-- Table -->
-                                    <table class="table table-primary table-hover text-center mt-5 mb-5">
-                        
-                                            <thead>
-                        
-                                                <tr class="bg-danger text-white">
-                                                    <th scope="col">Nom</th>
-                                                    <th scope="col">Age</th>
-                                                    <th scope="col">Niveau</th>
-                                                    <th scope="col">Jour</th>
-                                                    <th scope="col">Horaires</th>
-                                                    <th scope="col">Anim.</th>
-                                                    <th scope="col">Salle</th>
-                                                    <th scope="col">
-                                                        <span class="text-nowrap tooltip">MC
-                                                            <span class="tooltiptext">Tarifs pour les résidents de Mauguio-Carnon</span>
-                                                            <svg class="svg-mini-05 svg-blue" data-name="Layer 1" viewBox="0 0 32 32">
-                                                                <path class="cls-1" d="M16,1A15,15,0,1,0,31,16,15,15,0,0,0,16,1Zm2,22a2,2,0,0,1-4,0V16a2,2,0,0,1,4,0ZM16,12.19A2.19,2.19,0,1,1,18.19,10,2.19,2.19,0,0,1,16,12.19Z"/>
-                                                            </svg>
-                                                        </span>
-                                                    </th>
-                                                    <th scope="col">
-                                                        <span class="text-nowrap tooltip">Hors MC
-                                                            <span class="tooltiptext">Tarifs pour les résidents hors commune</span>
-                                                            <svg class="svg-mini-05 svg-blue" data-name="Layer 1" viewBox="0 0 32 32">
-                                                                <path class="cls-1" d="M16,1A15,15,0,1,0,31,16,15,15,0,0,0,16,1Zm2,22a2,2,0,0,1-4,0V16a2,2,0,0,1,4,0ZM16,12.19A2.19,2.19,0,1,1,18.19,10,2.19,2.19,0,0,1,16,12.19Z"/>
-                                                            </svg>
-                                                        </span>
-                                                    </th>
-                                                    {% if user.is_superuser %}
-                                                        <th>Admin</th>
-                                                    {% endif %}
-                                                </tr>
-                        
-                                            </thead>
+                                    <!-- Wrapper -->
+                                    <div class="wrapper-search">
 
-                                            <tbody>
-                        
-                                                {% for slot in animation.list %}
-                        
-                                                    <tr data-filter-activated="" data-filter-day="{{ slot.day|lower }} {{ slot.animation.animation_type|lower|cut:" " }}" data-filter-city="{{ slot.room.venue.city|lower }}" data-filter-time-start="{{ slot.time_start|time:"H" }}" class="filter-initialisation {% if slot.room.venue.city.id == 2 %} table-warning{% endif %}">
-
-                                                        <!--Badge - New -->
-                                                        <!--<td>{% if slot.new %}<span class="badge badge-pill badge-success">N</span>{% endif %}</td>        -->
-
-                                                        <!-- Slot name-->
-                                                        <td>{% if slot.name|length > 0%}{{ slot.name }}{% else%}-{% endif %}</td>
-
-                                                        <!-- Age -->
-                                                        <td>
-                                                            <span class="text-nowrap">
-                                                                                {% if slot.age_group.age_min == slot.age_group.age_max %}
-                                                                                    {{ slot.age_group.age_min }}
-                                                                                {% else %}
-                                                                                    {{ slot.age_group.age_min }} / {{ slot.age_group.age_max }}
-                                                                                {% endif %}
-                                                            </span>
-                                                        </td>
-
-                                                        <!-- Level -->
-                                                        <td>{% if slot.level is not None %}{{ slot.level }}{% else%}-{% endif %}</td>
-
-                                                        <!-- Day -->
-                                                        <td>{{ slot.day }}{% if slot.notes|length > 0 %} *{% endif %}</td>
-
-                                                        <!-- Hours -->
-                                                        <td>
-                                                            <span class="text-nowrap">{{ slot.time_start|time:"H:i"}} /</span>
-                                                            <span class="text-nowrap">{{ slot.time_end  |time:"H:i"}}</span>
-                                                        </td>
-
-                                                        <!-- Hosts-->
-                                                        <td>
-                                                            {% for host in slot.host.all %}
-                                                                <span class="text-uppercase"> {{ host.initials }}</span>
-                                                            {% endfor %}
-                                                        </td>
-
-                                                        <!-- Venue - Room -->
-                                                        <td>
-                                                            <a href="{% url 'venue' slot.room.venue.name %}">{{ slot.room.venue.name }}<br>{% if slot.room.room_nb is None %}{% else %}{{ slot.room.room_nb }}{% endif %}{% if slot.room.room_nb and slot.room.room_name  %} - {% endif%}{% if slot.room.room_name is None %}{% else %}{{ slot.room.room_name }}{% endif %}</a>
-                                                        </td>
-
-                                                        <!-- Rate - Residents -->
-                                                        <td>
-
-                                                            <span class="text-nowrap tooltip">
-
-                                                                {% if slot.rate_resident_1 is None %}{% else %}{{ slot.rate_resident_1 }} € {% endif %}
+                                        <h2 class="mt-4 mb-3">{{ animation.grouper }}</h2>
+                                            
+                                        <!-- Table -->
+                                        <table class="table table-primary table-hover text-center mt-5 mb-5">
+                            
+                                                <thead>
+                            
+                                                    <tr class="bg-danger text-white">
+                                                        <th scope="col">Nom</th>
+                                                        <th scope="col">Age</th>
+                                                        <th scope="col">Niveau</th>
+                                                        <th scope="col">Jour</th>
+                                                        <th scope="col">Horaires</th>
+                                                        <th scope="col">Anim.</th>
+                                                        <th scope="col">Salle</th>
+                                                        <th scope="col">
+                                                            <span class="text-nowrap tooltip">MC
+                                                                <span class="tooltiptext">Tarifs pour les résidents de Mauguio-Carnon</span>
                                                                 <svg class="svg-mini-05 svg-blue" data-name="Layer 1" viewBox="0 0 32 32">
                                                                     <path class="cls-1" d="M16,1A15,15,0,1,0,31,16,15,15,0,0,0,16,1Zm2,22a2,2,0,0,1-4,0V16a2,2,0,0,1,4,0ZM16,12.19A2.19,2.19,0,1,1,18.19,10,2.19,2.19,0,0,1,16,12.19Z"/>
                                                                 </svg>
-                                                                <span class="tooltiptext">- Tarif 1 MC -<br>{% if slot.rate_resident_1 is None and slot.rate_resident_1_name is None %}{{ unmentionned_rate_text }}{% elif slot.rate_resident_1 is not None and slot.rate_resident_1_name is None %}{% else %}{{ slot.rate_resident_1_name }}{% endif %}</span>
-
                                                             </span>
-
-                                                            <br>
-
-                                                            <span class="text-nowrap tooltip">
-                                                                {% if slot.rate_resident_2 is None %}{% else %}{{ slot.rate_resident_2 }} €
-                                                                    <svg class="svg-mini-05 svg-blue" data-name="Layer 1" viewBox="0 0 32 32">
-                                                                        <path class="cls-1" d="M16,1A15,15,0,1,0,31,16,15,15,0,0,0,16,1Zm2,22a2,2,0,0,1-4,0V16a2,2,0,0,1,4,0ZM16,12.19A2.19,2.19,0,1,1,18.19,10,2.19,2.19,0,0,1,16,12.19Z"/>
-                                                                    </svg>
-                                                                {% endif %}
-                                                                <span class="tooltiptext">- Tarif 2 MC -<br>{% if slot.rate_resident_2 is None and slot.rate_resident_2_name is None %}{{ unmentionned_rate_text }}{% elif slot.rate_resident_1 is not None and slot.rate_resident_2_name is None %}{{ two_rates_no_info_on_second_rate }}{% else %}{{ slot.rate_resident_2_name }}{% endif %}</span>
-                                                            </span>
-
-                                                        </td>
-
-                                                        <!-- Rate - Non Residents -->
-                                                        <td>
-
-                                                            <span class="text-nowrap tooltip">
-                                                                {% if slot.rate_non_resident_1 is None %}{% else %}{{ slot.rate_non_resident_1 }} € {% endif %}
+                                                        </th>
+                                                        <th scope="col">
+                                                            <span class="text-nowrap tooltip">Hors MC
+                                                                <span class="tooltiptext">Tarifs pour les résidents hors commune</span>
                                                                 <svg class="svg-mini-05 svg-blue" data-name="Layer 1" viewBox="0 0 32 32">
                                                                     <path class="cls-1" d="M16,1A15,15,0,1,0,31,16,15,15,0,0,0,16,1Zm2,22a2,2,0,0,1-4,0V16a2,2,0,0,1,4,0ZM16,12.19A2.19,2.19,0,1,1,18.19,10,2.19,2.19,0,0,1,16,12.19Z"/>
                                                                 </svg>
-                                                                <span class="tooltiptext">- Tarif 1 Hors MC -<br>{% if slot.rate_resident_1 is None and slot.rate_non_resident_1_name is None %}{{ unmentionned_rate_text }}{% elif slot.rate_non_resident_1 is not None and slot.rate_non_resident_1_name is None %}{% else %}{{ slot.rate_non_resident_1_name }}{% endif %}</span>
                                                             </span>
-
-                                                            <br>
-
-                                                            <span class="text-nowrap tooltip">
-                                                                {% if slot.rate_non_resident_2 is None %}{% else %}{{ slot.rate_non_resident_2 }} €
-                                                                    <svg class="svg-mini-05 svg-blue" data-name="Layer 1" viewBox="0 0 32 32">
-                                                                        <path class="cls-1" d="M16,1A15,15,0,1,0,31,16,15,15,0,0,0,16,1Zm2,22a2,2,0,0,1-4,0V16a2,2,0,0,1,4,0ZM16,12.19A2.19,2.19,0,1,1,18.19,10,2.19,2.19,0,0,1,16,12.19Z"/>
-                                                                    </svg>
-                                                                {% endif %}
-                                                                <span class="tooltiptext">- Tarif 2 Hors MC -<br>{% if slot.rate_non_resident_2 is None and slot.rate_non_resident_2_name is None %}{{ unmentionned_rate_text }}{% elif slot.rate_non_resident_1 is not None and slot.rate_non_resident_2_name is None %}{{ two_rates_no_info_on_second_rate }}{% else %}{{ slot.rate_non_resident_2_name }}{% endif %}</span>
-                                                            </span>
-
-                                                        </td>
-
-                                                        <!-- Admin -->
+                                                        </th>
                                                         {% if user.is_superuser %}
-                                                            <td><a href="{% url 'admin_edit_activity' slot.id %}" target="_blank">Modifier</a></td>
+                                                            <th>Admin</th>
                                                         {% endif %}
                                                     </tr>
-                        
-                                                {% endfor %}
-                        
-                                            </tbody>
-                        
-                                        </table>
+                            
+                                                </thead>
+
+                                                <tbody>
+                            
+                                                    {% for slot in animation.list %}
+                            
+                                                        <tr data-filter-activated="" data-filter-day="{{ slot.day|lower }} {{ slot.animation.animation_type|lower|cut:" " }}" data-filter-city="{{ slot.room.venue.city|lower }}" data-filter-time-start="{{ slot.time_start|time:"H" }}" class="filter-initialisation {% if slot.room.venue.city.id == 2 %} table-warning{% endif %}">
+
+                                                            <!--Badge - New -->
+                                                            <!--<td>{% if slot.new %}<span class="badge badge-pill badge-success">N</span>{% endif %}</td>        -->
+
+                                                            <!-- Slot name-->
+                                                            <td>{% if slot.name|length > 0%}{{ slot.name }}{% else%}-{% endif %}</td>
+
+                                                            <!-- Age -->
+                                                            <td>
+                                                                <span class="text-nowrap">
+                                                                                    {% if slot.age_group.age_min == slot.age_group.age_max %}
+                                                                                        {{ slot.age_group.age_min }}
+                                                                                    {% else %}
+                                                                                        {{ slot.age_group.age_min }} / {{ slot.age_group.age_max }}
+                                                                                    {% endif %}
+                                                                </span>
+                                                            </td>
+
+                                                            <!-- Level -->
+                                                            <td>{% if slot.level is not None %}{{ slot.level }}{% else%}-{% endif %}</td>
+
+                                                            <!-- Day -->
+                                                            <td>{{ slot.day }}{% if slot.notes|length > 0 %} *{% endif %}</td>
+
+                                                            <!-- Hours -->
+                                                            <td>
+                                                                <span class="text-nowrap">{{ slot.time_start|time:"H:i"}} /</span>
+                                                                <span class="text-nowrap">{{ slot.time_end  |time:"H:i"}}</span>
+                                                            </td>
+
+                                                            <!-- Hosts-->
+                                                            <td>
+                                                                {% for host in slot.host.all %}
+                                                                    <span class="text-uppercase"> {{ host.initials }}</span>
+                                                                {% endfor %}
+                                                            </td>
+
+                                                            <!-- Venue - Room -->
+                                                            <td>
+                                                                <a href="{% url 'venue' slot.room.venue.name %}">{{ slot.room.venue.name }}<br>{% if slot.room.room_nb is None %}{% else %}{{ slot.room.room_nb }}{% endif %}{% if slot.room.room_nb and slot.room.room_name  %} - {% endif%}{% if slot.room.room_name is None %}{% else %}{{ slot.room.room_name }}{% endif %}</a>
+                                                            </td>
+
+                                                            <!-- Rate - Residents -->
+                                                            <td>
+
+                                                                <span class="text-nowrap tooltip">
+
+                                                                    {% if slot.rate_resident_1 is None %}{% else %}{{ slot.rate_resident_1 }} € {% endif %}
+                                                                    <svg class="svg-mini-05 svg-blue" data-name="Layer 1" viewBox="0 0 32 32">
+                                                                        <path class="cls-1" d="M16,1A15,15,0,1,0,31,16,15,15,0,0,0,16,1Zm2,22a2,2,0,0,1-4,0V16a2,2,0,0,1,4,0ZM16,12.19A2.19,2.19,0,1,1,18.19,10,2.19,2.19,0,0,1,16,12.19Z"/>
+                                                                    </svg>
+                                                                    <span class="tooltiptext">- Tarif 1 MC -<br>{% if slot.rate_resident_1 is None and slot.rate_resident_1_name is None %}{{ unmentionned_rate_text }}{% elif slot.rate_resident_1 is not None and slot.rate_resident_1_name is None %}{% else %}{{ slot.rate_resident_1_name }}{% endif %}</span>
+
+                                                                </span>
+
+                                                                <br>
+
+                                                                <span class="text-nowrap tooltip">
+                                                                    {% if slot.rate_resident_2 is None %}{% else %}{{ slot.rate_resident_2 }} €
+                                                                        <svg class="svg-mini-05 svg-blue" data-name="Layer 1" viewBox="0 0 32 32">
+                                                                            <path class="cls-1" d="M16,1A15,15,0,1,0,31,16,15,15,0,0,0,16,1Zm2,22a2,2,0,0,1-4,0V16a2,2,0,0,1,4,0ZM16,12.19A2.19,2.19,0,1,1,18.19,10,2.19,2.19,0,0,1,16,12.19Z"/>
+                                                                        </svg>
+                                                                    {% endif %}
+                                                                    <span class="tooltiptext">- Tarif 2 MC -<br>{% if slot.rate_resident_2 is None and slot.rate_resident_2_name is None %}{{ unmentionned_rate_text }}{% elif slot.rate_resident_1 is not None and slot.rate_resident_2_name is None %}{{ two_rates_no_info_on_second_rate }}{% else %}{{ slot.rate_resident_2_name }}{% endif %}</span>
+                                                                </span>
+
+                                                            </td>
+
+                                                            <!-- Rate - Non Residents -->
+                                                            <td>
+
+                                                                <span class="text-nowrap tooltip">
+                                                                    {% if slot.rate_non_resident_1 is None %}{% else %}{{ slot.rate_non_resident_1 }} € {% endif %}
+                                                                    <svg class="svg-mini-05 svg-blue" data-name="Layer 1" viewBox="0 0 32 32">
+                                                                        <path class="cls-1" d="M16,1A15,15,0,1,0,31,16,15,15,0,0,0,16,1Zm2,22a2,2,0,0,1-4,0V16a2,2,0,0,1,4,0ZM16,12.19A2.19,2.19,0,1,1,18.19,10,2.19,2.19,0,0,1,16,12.19Z"/>
+                                                                    </svg>
+                                                                    <span class="tooltiptext">- Tarif 1 Hors MC -<br>{% if slot.rate_resident_1 is None and slot.rate_non_resident_1_name is None %}{{ unmentionned_rate_text }}{% elif slot.rate_non_resident_1 is not None and slot.rate_non_resident_1_name is None %}{% else %}{{ slot.rate_non_resident_1_name }}{% endif %}</span>
+                                                                </span>
+
+                                                                <br>
+
+                                                                <span class="text-nowrap tooltip">
+                                                                    {% if slot.rate_non_resident_2 is None %}{% else %}{{ slot.rate_non_resident_2 }} €
+                                                                        <svg class="svg-mini-05 svg-blue" data-name="Layer 1" viewBox="0 0 32 32">
+                                                                            <path class="cls-1" d="M16,1A15,15,0,1,0,31,16,15,15,0,0,0,16,1Zm2,22a2,2,0,0,1-4,0V16a2,2,0,0,1,4,0ZM16,12.19A2.19,2.19,0,1,1,18.19,10,2.19,2.19,0,0,1,16,12.19Z"/>
+                                                                        </svg>
+                                                                    {% endif %}
+                                                                    <span class="tooltiptext">- Tarif 2 Hors MC -<br>{% if slot.rate_non_resident_2 is None and slot.rate_non_resident_2_name is None %}{{ unmentionned_rate_text }}{% elif slot.rate_non_resident_1 is not None and slot.rate_non_resident_2_name is None %}{{ two_rates_no_info_on_second_rate }}{% else %}{{ slot.rate_non_resident_2_name }}{% endif %}</span>
+                                                                </span>
+
+                                                            </td>
+
+                                                            <!-- Admin -->
+                                                            {% if user.is_superuser %}
+                                                                <td><a href="{% url 'admin_edit_activity' slot.id %}" target="_blank">Modifier</a></td>
+                                                            {% endif %}
+                                                        </tr>
+                            
+                                                    {% endfor %}
+                            
+                                                </tbody>
+                            
+                                            </table>
                                 
+                                    </div>
                                 {% endfor %} 
                             
                             </div>

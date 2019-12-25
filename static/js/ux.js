@@ -48,7 +48,7 @@ function FilterActivities(value,filter,category) {
             
     value  = value.toLowerCase()
     filter = filter.toLowerCase()
-    timer  = 500;
+    timer  = 0;
     
     if($('#FilterToggle_'+value+'_input').is(':checked')) {
         
@@ -97,9 +97,7 @@ function FilterActivities(value,filter,category) {
         };
         
         
-    }
-        
-    else {
+    } else {
         
         // change style applied to the toggle switch
         $('#FilterToggle_'+value+'_label').addClass("bg-filter-off");
@@ -147,7 +145,7 @@ function FilterActivities(value,filter,category) {
         };
 
     }
-
+        
         // select and show
         let lines =  $("*").filter(dataFilterOR(filtersCitiesArray, "data-filter-city"))
               .filter(dataFilterOR(filtersDaysArray, "data-filter-day"))
@@ -155,7 +153,10 @@ function FilterActivities(value,filter,category) {
         
         lines.finish();
         lines.show(timer);
-    
+
+
+        hideEmptyTables();
+
 }
 
 function dataFilterOR(array, attribute) {
@@ -225,6 +226,25 @@ function filterRemove(array, filter) {
     if (index > -1) {
       array.splice(index, 1);
     };
+
+};
+
+
+function hideEmptyTables() {
+
+    $(".wrapper-search").each(function() {
+
+        var lines_all = $(this).find("table>tbody>tr");
+        var lines_hidden = $(this).find("table>tbody>tr[style='display: none;']");
+
+        if (lines_hidden.length == lines_all.length) {
+            $(this).hide();
+        } else {
+            $(this).show();
+        }
+
+    })
+
 };
 
 
