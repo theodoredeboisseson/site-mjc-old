@@ -256,9 +256,9 @@ function hideEmptyTypes() {
         var animations_hidden = $(this).find(".wrapper_animation[style='display: none;']");
 
         if (animations.length == animations_hidden.length) {
-            $(this).hide();
+            $(this).children(".no-results").show();
         } else {
-            $(this).show();
+            $(this).children(".no-results").hide();
         }
     
     });

@@ -114,7 +114,10 @@
                             <div class="col-md-12">
                                 
                                 <div class="wrapper_type">
+
                                     <h1 class="mt-4 mb-3">{{ animation_type.grouper }}</h1>
+
+                                    <p class="no-results">Pas de résultat correspondant aux critères sélectionés.</p>
                                     
                                     {% regroup animation_type.list by animation as animations_list %} 
                                         
@@ -271,6 +274,7 @@
                                                 </table>
                                     
                                         </div>
+
                                     {% endfor %} 
                                 </div>
                             </div>
