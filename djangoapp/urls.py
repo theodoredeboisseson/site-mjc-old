@@ -16,6 +16,8 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 from views import urls as views_urls
 from news import urls as news_urls
@@ -37,4 +39,4 @@ urlpatterns = [
     path('events/', include(events_urls)),
     path('socials/', include(socials_urls)),
     path('checkout/', include(checkout_urls))
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
