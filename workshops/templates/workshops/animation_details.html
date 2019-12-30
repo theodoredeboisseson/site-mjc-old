@@ -7,10 +7,8 @@
         
         <div class="row">
               
-            </div>
-
             <!-- Content Column -->
-            <div class="col-md-12">
+            <div class="col">
             
                 <button class="btn btn-outline-danger mt-5" onclick="goBack()">Retour</button>
                 
@@ -46,84 +44,86 @@
                 </div>
                 
                 <!-- Table -->
-                <table class="table table-secondary table-hover text-center mt-5 mb-5">
-                    
-                    <thead>
-                          
-                        <tr class="bg-danger text-white">
-                            <th scope="col">Nom</th>
-                            <th scope="col">Age</th>
-                            <th scope="col">Niveau</th>
-                            <th scope="col">Jours & Horaires</th>
-                            <th scope="col">Anim.</th>
-                            <th scope="col">Salle</th>
-                            <th scope="col">Tarifs</th>
-                            <!-- Admin -->
-                            {% if user.is_superuser %}
-                                <th>Admin</th>
-                            {% endif %}
-                        </tr>
+                <div class="table-responsive-lg">
+                    <table class="table table-secondary table-hover text-center mt-5 mb-5">
                         
-                    </thead>
-                    
-                    <tbody>
-                    
-                        {% for slot in slots %}
-                        
-                            <tr class={% if slot.room.venue.city.id == 2 %}"table-warning"{% endif %}>
-                                
-                                <!--Badge - New -->
-                                <!--<td>{% if slot.new %}<span class="badge badge-pill badge-success">N</span>{% endif %}</td>        -->
-                                
-                                <!-- Slot name-->
-                                <td>{% if slot.name|length > 0%}{{ slot.name }}{% else%}-{% endif %}</td>
-                                
-                                <!-- Age -->
-                                <td>
-                                    <span class="text-nowrap">
-                                        {{ slot.age_group.age_min }} / {{ slot.age_group.age_max }}
-                                    </span>
-                                </td>
-                                
-                                <!-- Level -->
-                                <td>{% if slot.level|length > 0%}{{ slot.level }}{% else%}-{% endif %}</td>
-                                
-                                <!-- Day & Time -->
-                                <td>{{ slot.dates|linebreaks }}</td>
-                                
-                                <!-- Hosts-->
-                                <td>
-                                    {% for host in slot.host.all %}
-                                        {{ host.initials }}
-                                    {% endfor %}
-                                </td>
-                                
-                                <!-- Venue - Room -->
-                                <td>
-                                    <a href="{% url 'venue' slot.room.venue.name %}">
-                                        <span class="text-nowrap">{{ slot.room.venue.name }}</span>
-                                        <br>
-                                        {% if slot.room.room_nb is None %}{% else %}{{ slot.room.room_nb }}{% endif %}{% if slot.room.room_nb and slot.room.room_name  %}
-                                        <br>
-                                        {% endif%}{% if slot.room.room_name is None %}{% else %}<span class="text-nowrap">{{ slot.room.room_name }}</span>{% endif %}
-                                    </a>
-                                </td>
-                                
-                                <td>{{ slot.rate }}</td>
-                                
+                        <thead>
+                            
+                            <tr class="bg-danger text-white">
+                                <th scope="col">Nom</th>
+                                <th scope="col">Age</th>
+                                <th scope="col">Niveau</th>
+                                <th scope="col">Jours & Horaires</th>
+                                <th scope="col">Anim.</th>
+                                <th scope="col">Salle</th>
+                                <th scope="col">Tarifs</th>
                                 <!-- Admin -->
                                 {% if user.is_superuser %}
-                                <td><a href="{% url 'admin_edit_workshop' slot.id %}" target="_blank">Modifier</a></td>
+                                    <th>Admin</th>
                                 {% endif %}
-                                
                             </tr>
                             
-                        {% endfor %}
+                        </thead>
                         
-                    </tbody>
-                    
-                </table>
-
+                        <tbody>
+                        
+                            {% for slot in slots %}
+                            
+                                <tr class={% if slot.room.venue.city.id == 2 %}"table-warning"{% endif %}>
+                                    
+                                    <!--Badge - New -->
+                                    <!--<td>{% if slot.new %}<span class="badge badge-pill badge-success">N</span>{% endif %}</td>        -->
+                                    
+                                    <!-- Slot name-->
+                                    <td>{% if slot.name|length > 0%}{{ slot.name }}{% else%}-{% endif %}</td>
+                                    
+                                    <!-- Age -->
+                                    <td>
+                                        <span class="text-nowrap">
+                                            {{ slot.age_group.age_min }} / {{ slot.age_group.age_max }}
+                                        </span>
+                                    </td>
+                                    
+                                    <!-- Level -->
+                                    <td>{% if slot.level|length > 0%}{{ slot.level }}{% else%}-{% endif %}</td>
+                                    
+                                    <!-- Day & Time -->
+                                    <td>{{ slot.dates|linebreaks }}</td>
+                                    
+                                    <!-- Hosts-->
+                                    <td>
+                                        {% for host in slot.host.all %}
+                                            {{ host.initials }}
+                                        {% endfor %}
+                                    </td>
+                                    
+                                    <!-- Venue - Room -->
+                                    <td>
+                                        <a href="{% url 'venue' slot.room.venue.name %}">
+                                            <span class="text-nowrap">{{ slot.room.venue.name }}</span>
+                                            <br>
+                                            {% if slot.room.room_nb is None %}{% else %}{{ slot.room.room_nb }}{% endif %}{% if slot.room.room_nb and slot.room.room_name  %}
+                                            <br>
+                                            {% endif%}{% if slot.room.room_name is None %}{% else %}<span class="text-nowrap">{{ slot.room.room_name }}</span>{% endif %}
+                                        </a>
+                                    </td>
+                                    
+                                    <td>{{ slot.rate }}</td>
+                                    
+                                    <!-- Admin -->
+                                    {% if user.is_superuser %}
+                                    <td><a href="{% url 'admin_edit_workshop' slot.id %}" target="_blank">Modifier</a></td>
+                                    {% endif %}
+                                    
+                                </tr>
+                                
+                            {% endfor %}
+                            
+                        </tbody>
+                        
+                    </table>
+                </div>
+                
                 <!-- Notes - Animation -->
                 <!--<p class="mt-4 mb-3"><strong>Information générale :</strong></p>-->
                 <!--<p>{{ animation.notes      }}</p>-->
