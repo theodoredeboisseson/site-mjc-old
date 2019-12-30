@@ -24,5 +24,5 @@ DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATICFILES_LOCATION = 'static'
-STATIC_ROOT="/static"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = "/static/"
