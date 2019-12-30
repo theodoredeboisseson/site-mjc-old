@@ -1,4 +1,4 @@
-{% load static from staticfiles %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -12,10 +12,10 @@
     
     <meta property="og:title" content="MJC Mauguio" />
     <meta property="og:url" content="https://mjcmauguiocarnon.herokuapp.com" />
-    <meta property="og:image" content="{{ STATIC_URL }}logo/logo-mjc.jpg" />
+    <meta property="og:image" content="{% static 'logo/logo-mjc.jpg' %}" />
 
     <!-- ICON -->
-    <link rel="shortcut icon" href="{{ STATIC_URL }}images/icon.png">
+    <link rel="shortcut icon" href="{% static 'images/icon.png' %}">
 
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/bootstrap-theme.css' %}">
@@ -36,7 +36,7 @@
 
         <div class="container-fluid">
 
-            <a class="navbar-brand" href="/"><img class="img-fluid logo rounded" alt="" src="{{ STATIC_URL }}logo/Optimized-logo-mjc.jpg"></a>
+            <a class="navbar-brand" href="/"><img class="img-fluid logo rounded" alt="" src="{% static 'logo/Optimized-logo-mjc.jpg' %}"></a>
 
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -277,7 +277,7 @@
             <div class="row text-center">
 
                     <div class="col-xs-6 col-sm-3 offset-sm-1 px-3 py-3">
-                        <img class="footer-logo-1 rounded" alt="" src="{{ STATIC_URL }}logo/Optimized-logo-mjc.jpg">
+                        <img class="footer-logo-1 rounded" alt="" src="{% static 'logo/Optimized-logo-mjc.jpg' %}">
                     </div>
 
                     <div class="col-xs-12 col-sm-4 px-3 py-3">
@@ -315,7 +315,7 @@
                     </div>
 
                     <div class="col-xs-6 col-sm-3 px-3 py-3">
-                        <img class="footer-logo-1 rounded" alt="" src="{{ STATIC_URL }}logo/logo-ville-fond-blanc-paysage.png">
+                        <img class="footer-logo-1 rounded" alt="" src="{% static 'logo/logo-ville-fond-blanc-paysage.png' %}">
                     </div>
 
                 </div>
@@ -325,19 +325,19 @@
                 <div class="row text-center">
 
                     <div class="col-xs-6 col-sm-3 px-3 py-3">
-                        <img class="footer-logo-1 rounded" alt="" src="{{ STATIC_URL }}legal/logo-federation-mjc-white.png">
+                        <img class="footer-logo-1 rounded" alt="" src="{% static 'legal/logo-federation-mjc-white.png' %}">
                     </div>
 
                     <div class="col-xs-6 col-sm-3 px-3 py-3">
-                        <img class="footer-logo-1 rounded" alt="" src="{{ STATIC_URL }}legal/logo_jeunesse_et_sport.jpg">
+                        <img class="footer-logo-1 rounded" alt="" src="{% static 'legal/logo_jeunesse_et_sport.jpg' %}">
                     </div>
 
                     <div class="col-xs-6 col-sm-3 px-3 py-3">
-                        <img class="footer-logo-1 rounded" alt="" src="{{ STATIC_URL }}legal/Logo_Ca_du_Pays_de_lOr.png">
+                        <img class="footer-logo-1 rounded" alt="" src="{% static 'legal/Logo_Ca_du_Pays_de_lOr.png' %}">
                     </div>
 
                     <div class="col-xs-6 col-sm-3 px-3 py-3">
-                        <img class="footer-logo-1 rounded" alt="" src="{{ STATIC_URL }}legal/logo_ca_ herault.jpg">
+                        <img class="footer-logo-1 rounded" alt="" src="{% static 'legal/logo_ca_ herault.jpg' %}">
                     </div>
 
                 </div>
@@ -345,7 +345,7 @@
                 <p class="text-white mt-4 text-center"><strong>Accessible handicap</strong></p>
 
                 <div class="row">
-                    <div class="col-xs-12 px-3 py-3 atcha"><img class="footer-logo-2 img-fluid rounded" alt="" src="{{ STATIC_URL }}legal/MJC- logos-handicap.jpg"></div>    
+                    <div class="col-xs-12 px-3 py-3 atcha"><img class="footer-logo-2 img-fluid rounded" alt="" src="{% static 'legal/MJC- logos-handicap.jpg' %}"></div>    
                 </div>
 
         </div>
