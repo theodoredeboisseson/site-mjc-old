@@ -1,14 +1,13 @@
 from django.db import models
+from django.utils.text import slugify
+import utils
 
-
-def upload_path_handler(instance, filename):
-    return "images/socials/{family}/{title}/{file}".format(family=instance.family, title=instance.title, file=filename)
-    
 
 class Social_Family(models.Model):
     
     family = models.CharField("Famille d'événements (PAS DE SLASH DANS LE NOM !)", max_length=50, null=False, blank=False, unique=True)
-    image = models.ImageField("Image", upload_to="images/social_family/", blank=True, null=True)
+    folder = models.CharField("Folder", max_length=40, default="images/social_family/", null=True, blank=True, editable=False)
+    image = models.ImageField("Image", upload_to=utils.upload_path_handler, blank=True, null=True)
 
     def __str__(self):
             return self.family
@@ -17,6 +16,10 @@ class Social_Family(models.Model):
         verbose_name = "Famille d'Ateliers"
         verbose_name_plural = "1. Vivre Ensembe - Famille d'Ateliers"
 
+
+def upload_path_handler(instance, filename):
+    return "images/socials/{family}/{title}/{file}".format(family=slugify(instance.family), title=slugify(instance.title), file=utils.clean_filename(filename))
+    
 
 class Social(models.Model):
     

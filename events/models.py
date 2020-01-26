@@ -1,15 +1,14 @@
 from django.db import models
-
-
-def upload_path_handler(instance, filename):
-    return "images/events/{family}/{title}/{file}".format(family=instance.family, title=instance.title, file=filename)
+from django.utils.text import slugify
+import utils
 
 
 class Event_Family(models.Model):
     
-    family = models.CharField("Famille d'événements (PAS DE SLASH DANS LE NOM !)", max_length=50, null=False,
+    family = models.CharField("Famille d'événements", max_length=50, null=False,
                               blank=False, unique=True)
-    image = models.ImageField("Image", upload_to="images/event_family/", blank=True, null=True)
+    folder = models.CharField("Folder", max_length=40, default="images/event_family/", null=True, blank=True, editable=False)
+    image = models.ImageField("Image", upload_to=utils.upload_path_handler, blank=True, null=True)
 
     def __str__(self):
             return self.family
@@ -17,6 +16,10 @@ class Event_Family(models.Model):
     class Meta:
         verbose_name = "Famille d'événements"
         verbose_name_plural = "1. Familles d'événements"
+
+
+def upload_path_handler(instance, filename):
+    return "images/events/{family}/{title}/{file}".format(family=slugify(instance.family), title=slugify(instance.title), file=utils.clean_filename(filename))
 
             
 class Event(models.Model):

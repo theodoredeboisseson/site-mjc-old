@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from utils import upload_path_handler
 # from accounts.models import Profile
 
 
@@ -18,7 +19,8 @@ class Elements_Type(models.Model):
     element_type = models.CharField("Type d'élément", max_length=50, choices=TYPE)
     title = models.CharField("Label", max_length=50, null=True)
     description = models.TextField("Description", null=True)
-    image = models.ImageField("Image", upload_to="images/event_type", blank=True, null=True)
+    folder = models.CharField("Folder", max_length=40, default="images/event_type", null=True, blank=True, editable=False)
+    image = models.ImageField("Image", upload_to=upload_path_handler, blank=True, null=True)
     
     def __str__(self):
         return self.element_type
@@ -44,7 +46,8 @@ class Activity_Animation_Type(models.Model):
     
     animation_type = models.CharField("Type d'animation (ex: sports, activité artistique, ...)", max_length=100, null=False)
     description = models.TextField("Présentation générale", null=True)
-    image = models.ImageField("Image", upload_to="images/activity/animation_type", blank=True, null=True)
+    folder = models.CharField("Folder", max_length=40, default="images/activity/animation_type", null=True, blank=True, editable=False)
+    image = models.ImageField("Image", upload_to=upload_path_handler, blank=True, null=True)
     
     def __str__(self):
         return self.animation_type
@@ -62,7 +65,8 @@ class Activity_Animation(models.Model):
     disabled_friendly = models.BooleanField("Accessible handicap", default=None)
     new = models.BooleanField("Nouveau", default=None)
     available_in_both_cities = models.BooleanField("Existe à Mauguio ET à Carnon", default=None)
-    image = models.ImageField("Image", upload_to="images/activity/animation/", default="noimage.jpg")
+    folder = models.CharField("Folder", max_length=40, default="images/activity/animation/", null=True, blank=True, editable=False)
+    image = models.ImageField("Image", upload_to=upload_path_handler, default="noimage.jpg")
     flash = models.CharField("Info flash", max_length=50, null=True, blank=True)
     description = models.TextField("Présentation générale", blank=True)
     notes = models.TextField("Notes spécifiques (certif. médical, license, ...)", null=True, blank=True)
@@ -110,7 +114,8 @@ class Host(models.Model):
     firstname = models.CharField("Prénom", max_length=100, null=True)
     lastname = models.CharField("Nom", max_length=100, null=True)
     initials = models.CharField("Initiales", max_length=10, null=True)
-    image = models.ImageField("Image", upload_to="images/hosts/", default="noimage.jpg")
+    folder = models.CharField("Folder", max_length=40, default="images/hosts/", null=True, blank=True, editable=False)
+    image = models.ImageField("Image", upload_to=upload_path_handler, default="noimage.jpg")
     resume = models.TextField("Présentation", null=True)
     
     def __str__(self):
