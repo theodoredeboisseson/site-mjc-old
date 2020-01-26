@@ -1,10 +1,11 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.text import slugify
 # from dateutil.parser    import parse
 
 
 def upload_path_handler(instance, filename):
-    return "images/news/{title}/{file}".format(title=instance.title, file=filename)
+    return "images/news/{title}/{file}".format(title=slugify(instance.title), file=slugify(filename))
 
 
 class News(models.Model):
