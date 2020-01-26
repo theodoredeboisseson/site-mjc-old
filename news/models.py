@@ -6,7 +6,7 @@ from django.utils.text import slugify
 def upload_path_handler(instance, filename):
     slug = slugify(filename)
     ext = filename.split(".")[-1]
-    clean_fn = slug[0:len(slug)-len(ext)] + "." + ext
+    clean_fn = slug[0:len(slug)-len(ext)] + ext
     return "images/news/{title}/{file}".format(title=slugify(instance.title), file=clean_fn)
 
 
