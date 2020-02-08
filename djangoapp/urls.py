@@ -39,5 +39,5 @@ urlpatterns = [
     path('workshops/', include(workshops_urls)),
     path('events/', include(events_urls)),
     path('socials/', include(socials_urls)),
-    path('checkout/', include(checkout_urls))
+    path('checkout/', include(checkout_urls)),
 ] + static(STATIC_URL, document_root=STATIC_ROOT)

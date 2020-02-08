@@ -1,6 +1,6 @@
 from django.db import models
-from ckeditor.fields import RichTextField  # https://django-ckeditor.readthedocs.io/en/latest/
 from utils import upload_path_handler
+from ckeditor.fields import RichTextField
 
 
 class Slides(models.Model):

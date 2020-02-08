@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'events',
     'social',
     'checkout',
-    'files'
+    'files',
+    'ckeditor'
 ]
 
 MIDDLEWARE = [
@@ -48,7 +49,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware'
-
 ]
 
 ROOT_URLCONF = 'djangoapp.urls'

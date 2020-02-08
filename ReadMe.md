@@ -86,6 +86,7 @@ The following frameworks and librairies have been used:
 * [Django 2.0](https://www.djangoproject.com/)
 * [jQuery](https://jquery.com/)
 * [Bootstrap](https://getbootstrap.com/) version 4.1.1
+* [Ckeditor](https://django-ckeditor.readthedocs.io/en/latest/)
 
 
 ### SERVICES
