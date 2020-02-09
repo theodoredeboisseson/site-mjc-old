@@ -18,7 +18,7 @@
             
             <hr>
             
-            <!-- Animation description -->
+            <!-- Event description -->
             <h1 class="mt-4 text-center text-danger">{{ event.family }}</h1>
             
             <h1 class="mt-4 text-center">{{ event.title }}</h1>
@@ -42,7 +42,9 @@
                 </div>
                 
                 <div class="col-md-9">
-                    {{ event.description|linebreaks }}
+                    {% autoescape off %}
+                        {{ event.description }}
+                    {% endautoescape %}
                 </div>
                             
             </div>

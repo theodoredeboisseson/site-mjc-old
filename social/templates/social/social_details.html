@@ -44,7 +44,9 @@
                 </div>
                 
                 <div class="col-md-9">
-                    {{ social.description|linebreaks }}
+                    {% autoescape off %}
+                        {{ social.description }}
+                    {% endautoescape %}
                 </div>
                             
             </div>

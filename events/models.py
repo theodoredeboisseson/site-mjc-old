@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from ckeditor.fields import RichTextField
 import utils
 
 
@@ -27,7 +28,7 @@ class Event(models.Model):
     family = models.ForeignKey(Event_Family,  related_name="Event",  on_delete=models.SET_NULL, null=True, blank=False)
     title = models.CharField("Titre (nom)", max_length=100, null=False, blank=False)
     subtitle = models.CharField("Sous-titre",  max_length=100, null=False, blank=True)
-    description = models.TextField("Description", null=True, blank=False)
+    description = RichTextField("Description", null=True, blank=False)
     venue = models.CharField("Lieu(x)",  max_length=100, null=False, blank=False)
     date_and_time = models.CharField("Date(s) & Heure(s)",  max_length=200, null=True, blank=False)
     date_first_day = models.DateField("Commence le", null=True)

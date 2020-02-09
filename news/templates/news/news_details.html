@@ -41,7 +41,7 @@
         
             <!-- Post Content -->
         
-            <p class=" text-justify mx-3">{{ news.content|linebreaks      }}</p>
+            <p class=" text-justify mx-3">{% autoescape off %}{{ news.content }}{% endautoescape %}</p>
             
             {% if news.file %}
             <div class="mt-3 row">
