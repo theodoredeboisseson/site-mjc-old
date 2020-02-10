@@ -6,6 +6,9 @@
 CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
 	config.language = 'fr';
+	config.allowedContent = true;
 	// config.htmlEncodeOutput = false;
 	// config.entities = false;
+	// config.autoUpdateElement = false;
+
 };

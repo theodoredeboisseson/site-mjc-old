@@ -116,9 +116,9 @@ STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
-# Build your own here: https://ckeditor.com/latest/samples/toolbarconfigurator/index.html#basic
+
 CKEDITOR_CONFIGS = {
-   
+    # Build your own here: https://ckeditor.com/latest/samples/toolbarconfigurator/index.html#basic
     'default': {
         'skin': 'moono-lisa',
         'toolbar_Basic': [
