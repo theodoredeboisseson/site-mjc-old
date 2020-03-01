@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import Slides, PageSection
+from .models import Slides, PagePseudoStatic, PageFile
 
 
 admin.site.register(Slides)
-admin.site.register(PageSection)
+admin.site.register(PagePseudoStatic)
+admin.site.register(PageFile)
+

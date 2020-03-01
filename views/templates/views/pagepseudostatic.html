@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container"> 
+              
+        {% autoescape off %}
+            {{ page.content }}
+        {% endautoescape %}
+
+        {% if documents %}
+
+        <div class="row">
+
+            <div class="col-md-8 offset-md-2">
+            
+                <!-- Documents à destinations des membres -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="mt-4 mb-3">Documents</h2>
+                        <a class="anchor" id="documents"></a>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                
+                    <a class="anchor" id="documents"></a>
+
+                    <div class="col-md">
+                        <p>Vous trouverez ci-dessous les documents mis à votre disposition:</p>
+                    </div>
+            
+                </div>
+
+
+                <div class="row mb-4 ml-1">
+
+                    {% for d in documents %}
+                
+                        <div class="card card-list-hover m-2">
+                            <div class="img-doc rounded-top" style="background-image:url('{{ STATIC_URL }}images/doc.png')"></div>
+                            <div class="card-body">
+                            <p class="card-text">{{ d.file_name }}</p>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                
+                </div>
+            
+            {% endif %}
+
+            </div>
+        </div>
+    
+    </div>
+
+{% endblock %}

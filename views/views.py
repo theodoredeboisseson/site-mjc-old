@@ -3,7 +3,14 @@ from django.http import FileResponse, Http404
 from activities.models import Venue, Host
 from news.models import News
 from files.models import Files_CR
-from .models import Slides
+from .models import Slides, PagePseudoStatic, PageFile
+
+
+def pseudostaticpage(page_id):
+    """ page_id: int - id of the PageFile record """
+    page = get_object_or_404(PagePseudoStatic, id=page_id)
+    documents = PageFile.objects.filter(page=page.id).order_by('file_name')
+    return {'page': page, 'documents': documents}
 
 
 def get_home_page(request):
@@ -12,33 +19,32 @@ def get_home_page(request):
     return render(request, "views/index.html", {'carousel':carousel, 'last_news': last_news})
 
 
-def get_info_page(request):
-    return render(request, "views/info.html")
-
-
-def get_calendar_activities_page(request):
-    return render(request, "views/calendar_activities.html")
-
-
 def get_about_page(request):
-    documents = Files_CR.objects.all().order_by('order')
-    return render(request, "views/about.html", {'documents':documents})
-
-   
-def get_rate_and_registration_activities_page(request):
-    return render(request, "views/rate_and_registration_activities.html")
+    return render(request, "views/pagepseudostatic.html", pseudostaticpage(1))
 
 
-def get_rate_and_registration_workshop_page(request):
-    return render(request, "views/rate_and_registration_workshops.html")
-
-
-def get_youth_mauguio_page(request):
-    return render(request, "views/youth_mauguio.html")
+def get_info_page(request):
+    return render(request, "views/pagepseudostatic.html", pseudostaticpage(2))
 
 
 def get_youth_carnon_page(request):
-    return render(request, "views/youth_carnon.html")
+    return render(request, "views/pagepseudostatic.html", pseudostaticpage(3))
+
+
+def get_youth_mauguio_page(request):
+    return render(request, "views/pagepseudostatic.html", pseudostaticpage(4))
+
+
+def get_rate_and_registration_activities_page(request):
+    return render(request, "views/pagepseudostatic.html", pseudostaticpage(5))
+
+
+def get_calendar_activities_page(request):
+    return render(request, "views/pagepseudostatic.html", pseudostaticpage(6))
+
+
+def get_rate_and_registration_workshop_page(request):
+    return render(request, "views/pagepseudostatic.html", pseudostaticpage(7))
 
 
 def get_venue(request, name_venue):
@@ -47,7 +53,7 @@ def get_venue(request, name_venue):
 
 
 def get_venues_list(request):
-    venues = Venue.objects.all
+    venues = Venue.objects.all().order_by('name')
     return render(request, "views/venues_list.html", {'venues': venues} )
 
 
