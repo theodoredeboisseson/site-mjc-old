@@ -68,7 +68,6 @@ TEMPLATES = [
                 'context_processors.get_list_of_animation_types_activities',
                 'context_processors.get_list_of_animation_types_workshops',
                 'context_processors.get_elements_types',
-                'context_processors.get_documents'
             ],
         },
     },
