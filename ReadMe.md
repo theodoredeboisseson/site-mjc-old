@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/Xorast/MJC-Website.svg?branch=master)](https://travis-ci.org/Xorast/MJC-Website)
-
 # PROJECT MJC - YOUTH & COMMUNITY CENTER
 
 MJC association's website (2,800 members).
