@@ -38,13 +38,14 @@
                 <div class="row mb-4 ml-1">
 
                     {% for d in documents %}
-                
-                        <div class="card card-list-hover m-2">
-                            <div class="img-doc rounded-top" style="background-image:url('{{ STATIC_URL }}images/doc.png')"></div>
-                            <div class="card-body">
-                            <p class="card-text">{{ d.file_name }}</p>
+                        
+                        <a href="{{ MEDIA_URL }}{{ d.file }}" target="blank">
+                            <div class="card card-list-hover m-2">
+                                <div class="img-doc rounded-top" style="background-image:url('{{ STATIC_URL }}images/doc.png')"></div>
+                                <div class="card-body">
+                                <p class="card-text">{{ d.file_name }}</p>
+                                </div>
                             </div>
-                        </div>
 
                     {% endfor %}
                 
