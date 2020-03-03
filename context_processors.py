@@ -26,8 +26,3 @@ def get_elements_types(request):
     return {'activity': activity,
             'workshop': workshop,
             'event': event}
-    
-
-def get_documents(request):
-    documents = Files_Pseudostatic.objects.all()
-    return {'documents': documents}
