@@ -1,6 +1,5 @@
 from activities.models import Activity_Animation_Type, Elements_Type
 from workshops.models import Workshop_Animation_Type
-from files.models import Files_Pseudostatic
 
 
 def get_list_of_animation_types_activities(request):

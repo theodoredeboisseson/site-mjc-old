@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'events',
     'social',
     'checkout',
-    'files',
     'ckeditor'
 ]
 
