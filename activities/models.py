@@ -27,7 +27,7 @@ class Elements_Type(models.Model):
 
     class Meta:
             verbose_name = "Eléments - Type"
-            verbose_name_plural = "Z. Eléments - Types"
+            verbose_name_plural = "Z. Page principale - Cartes 'Activité' / 'Stages' / 'Evénement' "
 
     
 class Period(models.Model):

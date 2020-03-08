@@ -15,7 +15,7 @@ class Slides(models.Model):
         
     class Meta:
         verbose_name = "Diapositive"
-        verbose_name_plural = "1. Caroussel (Bandeau défilant)"
+        verbose_name_plural = "1. Page principale - Bandeau défilant"
 
 class PagePseudoStatic(models.Model):
 
