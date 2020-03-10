@@ -5,7 +5,8 @@ from django.urls import path
 from .views import get_home_page, get_about_page, get_info_page, get_calendar_activities_page, \
                    get_youth_mauguio_page, get_youth_carnon_page, get_venue, get_venues_list, \
                    get_host, get_admin_panel, get_rate_and_registration_activities_page, \
-                   get_rate_and_registration_workshop_page, edit_activity, edit_workshop
+                   get_rate_and_registration_workshop_page, edit_activity, edit_workshop, \
+                   get_social_page
 
 
 urlpatterns = [
@@ -19,6 +20,7 @@ urlpatterns = [
          name='rate_and_registration_workshops'),
     path('youth_mauguio', get_youth_mauguio_page, name='youth_mauguio'),
     path('youth_carnon', get_youth_carnon_page, name='youth_carnon'),
+    path('social', get_social_page, name='social'),
     path('venue/<name_venue>', get_venue, name='venue'),
     path('venues', get_venues_list, name='venues_list'),
     path('host/<id>', get_host, name='host'),

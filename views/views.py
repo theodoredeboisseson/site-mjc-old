@@ -46,6 +46,10 @@ def get_rate_and_registration_workshop_page(request):
     return render(request, "views/pagepseudostatic.html", pseudostaticpage(7))
 
 
+def get_social_page(request):
+    return render(request, "views/pagepseudostatic.html", pseudostaticpage(8))
+
+
 def get_venue(request, name_venue):
     venue = get_object_or_404(Venue, name=name_venue)
     return render(request, "views/venue.html", {'venue': venue} )
