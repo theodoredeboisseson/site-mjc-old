@@ -48,10 +48,15 @@
     <!--<h1 class="my-4">Bienvenue sur le site de la MJC !</h1>-->
 
     <!-- Annoucement -->
-    <div class="alert alert-warning text-center mt-3">
-       <strong>IMPORTANT - Coronavirus - Suspension des activités pour tous - Voir <a href="/news">ACTU</a></strong>
-    </div>
-
+    {% for m in messages %}
+        <div class="alert alert-{{m.category}} text-center mt-3">
+            <p><strong>{{ m.title }}</strong></p>
+            {% autoescape off %}
+                {{ m.message }}
+            {% endautoescape %}
+        </div>
+    {% endfor %}
+    
     <!-- Offer Section -->
     <h2>Rejoignez-nous!</h2>
 

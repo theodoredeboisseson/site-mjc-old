@@ -17,6 +17,32 @@ class Slides(models.Model):
         verbose_name = "Diapositive"
         verbose_name_plural = "1. Page principale - Bandeau défilant"
 
+class LandingPageMessage(models.Model):
+
+    INFO = 'info'
+    SUCCESS = 'success'
+    WARNING = 'warning'
+    DANGER = 'danger'
+
+    CATEGORY = [
+        (INFO, 'INFO (Bleu)'),
+        (SUCCESS, 'POSITIF (Vert)'),
+        (WARNING, 'ATTENTION (Orange)'),
+        (DANGER, 'DANGER (Rouge)'),
+    ]
+
+    title = models.CharField("Titre", max_length=100, null=True, blank=True)
+    category = models.CharField("Couleur", max_length=100, choices=CATEGORY, default=INFO, null=True)
+    message = RichTextField("Message", null=True, blank=False)
+    order = models. IntegerField("Ordre", null=True, blank=False)
+
+    def __str__(self):
+        return f'Message N° {self.order} - {self.title}'
+
+    class Meta:
+        verbose_name = "Message"
+        verbose_name_plural = "2. Page Principale - Messages Importants"
+
 class PagePseudoStatic(models.Model):
 
     name = models.CharField("Nom", max_length=100, null=True, blank=True)
@@ -27,7 +53,7 @@ class PagePseudoStatic(models.Model):
 
     class Meta:
         verbose_name = "Page"
-        verbose_name_plural = "2. Pages"
+        verbose_name_plural = "3. Pages - Texte"
 
 
 class PageFile(models.Model):
@@ -43,4 +69,4 @@ class PageFile(models.Model):
         
     class Meta:
         verbose_name = "Documents"
-        verbose_name_plural = "3. Documents - Pages"
+        verbose_name_plural = "4. Pages - Documents"

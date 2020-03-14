@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import FileResponse, Http404
 from activities.models import Venue, Host
 from news.models import News
-from .models import Slides, PagePseudoStatic, PageFile
+from .models import Slides, LandingPageMessage, PagePseudoStatic, PageFile
 
 
 def pseudostaticpage(page_id):
@@ -14,8 +14,9 @@ def pseudostaticpage(page_id):
 
 def get_home_page(request):
     carousel = Slides.objects.all()
+    messages = LandingPageMessage.objects.all().order_by('order')
     last_news = News.objects.order_by('-published_date')[:3]
-    return render(request, "views/index.html", {'carousel':carousel, 'last_news': last_news})
+    return render(request, "views/index.html", {'carousel':carousel, 'messages': messages,'last_news': last_news})
 
 
 def get_about_page(request):

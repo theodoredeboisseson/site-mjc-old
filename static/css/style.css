@@ -86,6 +86,10 @@ body {
     }
 }
 
+.alert p {
+  margin-bottom: 0px;
+}
+
 .footer-bottom {
   position:       absolute;
   right:          0;
