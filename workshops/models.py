@@ -12,8 +12,8 @@ class Workshop_Animation_Type(models.Model):
         return self.animation_type
     
     class Meta:
-        verbose_name = "Atelier - Type d'animation"
-        verbose_name_plural = "1. Ateliers - Types d'animations"
+        verbose_name = "Stage - Famille d'animation"
+        verbose_name_plural = "1. Stages - Famille"
     
     
 class Workshop_Animation(models.Model):
@@ -31,8 +31,8 @@ class Workshop_Animation(models.Model):
         return '%s - %s' % (self.animation_type, self.name)
     
     class Meta:
-        verbose_name = 'Atelier - Animation'
-        verbose_name_plural = '2. Ateliers - Animation'
+        verbose_name = 'Stage - Animation'
+        verbose_name_plural = '2. Stages - Animation'
 
 
 class Workshop_Animation_Slot(models.Model):
@@ -55,5 +55,5 @@ class Workshop_Animation_Slot(models.Model):
         return '%s - %s - %s' % (self.workshop_animation, self.name, self.age_group)
     
     class Meta:
-        verbose_name = 'Atelier - Créneau'
-        verbose_name_plural = '3. Ateliers - Créneaux'
+        verbose_name = 'Stage - Créneau'
+        verbose_name_plural = '3. Stages - Créneaux'
