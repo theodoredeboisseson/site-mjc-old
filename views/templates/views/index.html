@@ -48,7 +48,7 @@
     <!--<h1 class="my-4">Bienvenue sur le site de la MJC !</h1>-->
 
     <!-- Annoucement -->
-    {% for m in messages %}
+    {% for m in messages_landing_page %}
         <div class="alert alert-{{m.category}} text-center mt-3">
             <p><strong>{{ m.title }}</strong></p>
             {% autoescape off %}

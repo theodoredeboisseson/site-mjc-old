@@ -16,7 +16,7 @@ def get_home_page(request):
     carousel = Slides.objects.all()
     messages = LandingPageMessage.objects.all().order_by('order')
     last_news = News.objects.order_by('-published_date')[:3]
-    return render(request, "views/index.html", {'carousel':carousel, 'messages': messages,'last_news': last_news})
+    return render(request, "views/index.html", {'carousel':carousel, 'messages_landing_page': messages,'last_news': last_news})
 
 
 def get_about_page(request):
