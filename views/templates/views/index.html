@@ -146,7 +146,7 @@
 
                 <div class="col-md-6">
                     <h2 class="card-title">{{ news.title }}</h2>
-                    <p class="card-text">{{ news.content|linebreaks|truncatewords:60 }}</p>
+                    <p class="card-text">{% autoescape off %}{{ news.content|linebreaks|truncatewords:60 }}{% endautoescape %}</p>
                     <a href="{% url 'news_details' news.id %}" class="btn btn-outline-danger">LIRE →</a>
                 </div>
 
