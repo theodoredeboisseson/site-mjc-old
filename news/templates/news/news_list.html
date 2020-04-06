@@ -26,7 +26,7 @@
 
                     <div class="col-md-6">
                         <h2 class="card-title">{{ n.title }}</h2>
-                        <p class="card-text">{{ n.content|linebreaks|truncatewords:100 }}</p>
+                        <p class="card-text">{% autoescape off %}{{ n.content|linebreaks|truncatewords:100 }}{% endautoescape %}</p>
                         <a href="{% url 'news_details' n.id %}" class="btn btn-outline-danger">LIRE →</a>
                     </div>
 
