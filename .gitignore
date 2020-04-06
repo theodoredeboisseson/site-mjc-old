@@ -5,3 +5,4 @@ launch.sh
 db
 db.sqlite3
 htmlcov
+env
