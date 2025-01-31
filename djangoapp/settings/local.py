@@ -1,6 +1,12 @@
 import os
+
+import dj_database_url
+from dotenv import load_dotenv
+
 from .base import *
 
+# load env variables
+load_dotenv()
 
 SECRET_KEY = 'luf*lin!+xg$hf2z-m*c9b)kaamk3xm$+xf@5@dxc3tw!t31mt'
 
@@ -12,16 +18,7 @@ ALLOWED_HOSTS = ['127.0.0.1']
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'pangur',
-        'PASSWORD': 'postgres',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
 STATIC_URL = '/static/'

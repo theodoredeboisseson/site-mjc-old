@@ -1,5 +1,10 @@
+from dotenv import load_dotenv
+
 from .base import *
 import dj_database_url
+
+# load env variables
+load_dotenv()
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
